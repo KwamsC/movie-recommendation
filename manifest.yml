@@ -1,0 +1,6 @@
+applications:
+- name: frontend
+  buildpack: staticfile_buildpack
+  memory: 128M
+  routes:
+    - route: dsfc08-frontend.mybluemix.net
