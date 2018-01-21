@@ -12,15 +12,15 @@ import { RatingsInMemoryService }  from './Mockups/ratings-in-memory.service';  
 
 // Components
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './/app-routing.module';
-import { RatingsComponent } from './ratings/ratings.component';
+import { RatingsComponent } from './components/ratings/ratings.component';
 
 // Services
-import { MessageService } from './message.service';
-import { RatingsService } from './ratings.service';
+import { MessageService } from './services/message service/message.service';
+import { RatingsService } from './services/ratings service/ratings.service';
 
 @NgModule({
   declarations: [
