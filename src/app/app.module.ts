@@ -19,8 +19,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { RatingsComponent } from './components/ratings/ratings.component';
 
 // Services
-import { MessageService } from './services/message service/message.service';
-import { RatingsService } from './services/ratings service/ratings.service';
+import { MessageService } from './services/messageservice/message.service';
+import { RatingsService } from './services/ratingsservice/ratings.service';
 
 @NgModule({
   declarations: [

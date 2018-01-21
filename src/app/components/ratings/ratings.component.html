@@ -1,8 +1,20 @@
-<h2>My Ratings</h2>
 
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<h2>My Ratings</h2>
     <div class="row">
-      <div class="col-lg-4" *ngFor= "let rating of ratings">
-        <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+      <div class="col-md-4" *ngFor= "let rating of ratings">
+        <div class="card card-01">
+            <img class="card-img-top" src="./../../../assets/car1.jpg" alt="Card image cap">
+          <div class="card-body">
+            <span class= "badge-box">
+              <span>
+                <button type="button" class="btn btn-center btn-default btn-circle btn-xl">{{rating.score}}</button>
+              </span>
+              <h4 class="card-title">Rating Value: {{rating.score}}</h4>
+              <p class ="card-text">{{rating.comment}}<p>
+            </span>
+          </div>
+        </div>
         <h2>RatingID: {{rating.id}}</h2>
         <p>{{rating.comment}}</p>
         <p>Rating Value: {{rating.score}}</p>
