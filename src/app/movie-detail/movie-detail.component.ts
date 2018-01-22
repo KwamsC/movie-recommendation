@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { Movie} from "../movie";
+import { MovieService} from "../movie.service";
 
 @Component({
   selector: 'app-movie-detail',
@@ -7,9 +12,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieDetailComponent implements OnInit {
 
-  constructor() { }
+  @Input() movie: Movie;
 
-  ngOnInit() {
+  constructor(  private route: ActivatedRoute,
+                private movieService: MovieService,
+                private location: Location) { }
+
+  ngOnInit(): void {
+    this.getMovie();
+  }
+
+  getMovie(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.movieService.getMovie(id)
+      .subscribe(movie => this.movie = movie);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  save(): void {
+    this.movieService.updateMovie(this.movie)
+      .subscribe(() => this.goBack());
   }
 
 }

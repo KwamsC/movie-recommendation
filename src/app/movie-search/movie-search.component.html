@@ -1,0 +1,11 @@
+<div id="search-component">
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+
+  <ul class="search-result">
+    <li *ngFor="let movie of movies$ | async" >
+      <a routerLink="/detail/{{movie.id}}">
+        {{movie.name}}
+      </a>
+    </li>
+  </ul>
+</div>

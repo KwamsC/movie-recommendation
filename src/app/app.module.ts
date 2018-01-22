@@ -17,11 +17,16 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RatingsComponent } from './ratings/ratings.component';
+import { MovieInMemoryService} from "./Mockups/movie-in-memory.service";
 
 // Services
 import { MessageService } from './message.service';
 import { RatingsService } from './ratings.service';
-import { ChrisComponent } from './chris/chris.component';
+import { MovieSearchComponent } from './movie-search/movie-search.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MovieService} from "./movie.service";
+import { MoviesComponent } from './movies/movies.component';
+import { FormBuilder} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -30,7 +35,9 @@ import { ChrisComponent } from './chris/chris.component';
     NavbarComponent,
     HomeComponent,
     RatingsComponent,
-    ChrisComponent,
+    MovieSearchComponent,
+    MessagesComponent,
+    MoviesComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,8 +49,13 @@ import { ChrisComponent } from './chris/chris.component';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
     RatingsInMemoryService, { dataEncapsulation: false }
-) ],
-  providers: [ RatingsService, MessageService ],
+),
+    HttpClientInMemoryWebApiModule.forRoot(
+      MovieInMemoryService, { dataEncapsulation: false }
+    )
+
+  ],
+  providers: [ RatingsService, MessageService, MovieService, FormBuilder ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

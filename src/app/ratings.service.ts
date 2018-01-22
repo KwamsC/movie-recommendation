@@ -24,7 +24,7 @@ export class RatingsService {
 
   /**Used to Debug a service by logging a message through message service*/
   private log(message: string) {
-    this.messageService.add('HeroService: ' + message);
+    this.messageService.add('MovieService: ' + message);
   }
 
   /**

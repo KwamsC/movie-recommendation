@@ -15,10 +15,15 @@
       <ul class="nav navbar-nav">
         <li class="nav-item"><a href="#" class="nav-link">Service</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Movies</a></li>
-        <li><form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form></li>
+        <li>
+
+          <!--<form class="form-inline my-2 my-lg-0">-->
+          <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+          <!--<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>-->
+        <!--</form>-->
+
+          <app-movie-search></app-movie-search>
+        </li>
       </ul>
 
      <!--right part of navigation bar-->
@@ -26,6 +31,11 @@
       <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
         <li class="dropdown order-1">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Register/Login <span class="caret"></span></button>
+
+
+
+
+
 
           <ul id="login-dp" class="dropdown-menu dropdown-menu-right mt-1">
             <li>
@@ -36,15 +46,19 @@
                     <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
                     <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                   </div>
+
+
                   or
+
+
                   <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputEmail2">Email address</label>
                       <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
                     </div>
                     <div class="form-group">
-                      <label class="sr-only" for="exampleInputPassword2">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                      <label class="sr-only" for="exampleInputPassword2">password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" formControlName="password" required>>
                       <div class="help-block text-right"><a href="">Forget the password ?</a></div>
                     </div>
                     <div class="form-group">
@@ -67,6 +81,10 @@
               </div>
             </li>
           </ul>
+
+
+
+
         </li>
       </ul>
     </div>
