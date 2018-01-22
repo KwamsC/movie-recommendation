@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MessageService } from '../../services/messageservice/message.service';
+import { MessageService } from '../message.service';
 
-import { Rating } from '../../DOM/rating';
-import { RatingsService } from '../../services/ratingsservice/ratings.service';
+import { Rating } from '../DOM/rating';
+import { RatingsService } from '../ratings.service';
 
 @Component({
   selector: 'app-ratings',

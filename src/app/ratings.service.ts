@@ -6,8 +6,8 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 // Import the DOM for the Ratings
-import { Rating } from '../../DOM/rating'
-import { MessageService } from '../messageservice/message.service';
+import { Rating } from './DOM/rating'
+import { MessageService } from './message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
