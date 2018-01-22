@@ -9,13 +9,16 @@ import { Movie} from "./movie";
 import { MessageService } from './message.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json',  })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                             'x-ibm-client-id' : 'bdd51b94-4183-4ce5-9e83-47c76b76c11a',
+                             'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO',
+                             'Authorization' : 'YjgTc2PquE76UYA4c6zFevueUATAnZ8ss39OPCVEYFdO7PFhzdwpUho9hEr6nWCm'})
 };
 
 @Injectable()
 export class MovieService {
 
-  private moviesUrl = 'localhost:3000/api/movies';  // URL to web api
+  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';  // URL to web api
 
   constructor(
     private http: HttpClient,

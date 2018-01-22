@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule }    from '@angular/forms';
 
 // These libraries are used to simulate HTTP Requests from the web, by
 //    Intercepting requests and serving them lcally.  Remove when using
@@ -18,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RatingsComponent } from './ratings/ratings.component';
 import { MovieInMemoryService} from "./Mockups/movie-in-memory.service";
+import { RegisterComponent } from './register/register.component';
 
 // Services
 import { MessageService } from './message.service';
@@ -27,6 +29,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MovieService} from "./movie.service";
 import { MoviesComponent } from './movies/movies.component';
 import { FormBuilder} from "@angular/forms";
+import { RegisterService } from "./register.service"
 
 @NgModule({
   declarations: [
@@ -38,12 +41,14 @@ import { FormBuilder} from "@angular/forms";
     MovieSearchComponent,
     MessagesComponent,
     MoviesComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
@@ -55,7 +60,7 @@ import { FormBuilder} from "@angular/forms";
     )
 
   ],
-  providers: [ RatingsService, MessageService, MovieService, FormBuilder ],
+  providers: [ RatingsService, MessageService, MovieService, FormBuilder, RegisterService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
