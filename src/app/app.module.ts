@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 // These libraries are used to simulate HTTP Requests from the web, by
 //    Intercepting requests and serving them lcally.  Remove when using
@@ -30,6 +29,7 @@ import { MovieService} from "./movie.service";
 import { MoviesComponent } from './movies/movies.component';
 import { FormBuilder} from "@angular/forms";
 import { RegisterService } from "./register.service"
+import {AuthenticationService} from "./authentication.service";
 
 @NgModule({
   declarations: [
@@ -60,7 +60,7 @@ import { RegisterService } from "./register.service"
     )
 
   ],
-  providers: [ RatingsService, MessageService, MovieService, FormBuilder, RegisterService ],
+  providers: [ RatingsService, MessageService, MovieService, FormBuilder, RegisterService, AuthenticationService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
