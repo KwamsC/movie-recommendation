@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Movie} from "../movie";
+import {Movie} from "../DOM/movie";
 import {MovieService} from "../movie.service";
 
 @Component({
@@ -9,32 +9,16 @@ import {MovieService} from "../movie.service";
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-
-  movies: Movie[];
+  movie: Movie;
+  id: "3613903f7d93fadc7ba5817b87938c44";
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    this.getMovies();
+    this.getMovie();
   }
 
-  getMovies(): void {
-    this.movieService.getMovies()
-      .subscribe(movies => this.movies = movies);
+  getMovie(): void {
+    this.movieService.getMovie(this.id).subscribe(movie=>this.movie);
   }
-
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.movieService.addMovie({name} as Movie)
-      .subscribe(movie => {
-        this.movies.push(movie);
-      });
-  }
-
-  delete(movie: Movie): void {
-    this.movies = this.movies.filter(h => h !== movie);
-    this.movieService.deleteMovie(movie).subscribe();
-  }
-
 }

@@ -31,6 +31,9 @@ import { FormBuilder} from "@angular/forms";
 import {AuthenticationService} from "./authentication.service";
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AutorizationInterceptorService} from "./autorization-interceptor.service";
+import {UnauthorizedInterceptorService} from "./unautorized-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -63,7 +66,21 @@ import { LogoutComponent } from './logout/logout.component';
     )
 
   ],
-  providers: [ RatingsService, MessageService, MovieService, FormBuilder, AuthenticationService ],
+  providers: [ RatingsService,
+    MessageService,
+    MovieService,
+    FormBuilder,
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS,
+      useClass: AutorizationInterceptorService,
+      multi: true
+    },
+    { provide: HTTP_INTERCEPTORS,
+      useClass: UnauthorizedInterceptorService,
+      multi: true
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
