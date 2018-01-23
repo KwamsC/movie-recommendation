@@ -1,38 +1,53 @@
 
-<html><head></head><body>
-
-<section>
-  <h1>Register as a new user</h1>
-  <form action="/api/users" method="post">
-    <fieldset>
-      <div>
-        <label for="email">Email:</label>
-        <input type="text" name="email" value="smart.movies.database@gmail.com">
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" value="qrxuCKSCuDXlNfB0ewlt9S1eV2gylk">
-      </div>
-      <div>
-        <button type="submit">Register</button>
-      </div>
-    </fieldset>
-  </form>
-</section>
-</body></html>
 
 
 <div>
-
+  <h1>Register as a new user</h1>
   <form #registrationForm="ngForm" (ngSubmit)="onSubmit()">
     <div>
       <label for="email">Email</label>
-      <input type="text" [(ngModel)]="userInfo.email" id="email" name="email" required>
+      <input type="text" [(ngModel)]="user.email" id="email" name="email" required>
     </div>
     <div>
       <label for="password">Password</label>
-      <input type="password" [(ngModel)]="userInfo.password" id="password" name = "password" required>
+      <input type="password" [(ngModel)]="user.password" id="password" name = "password" required>
     </div>
     <button type="submit">Register</button>
   </form>
 </div>
+
+
+<!--<section>-->
+  <!--<h1>Register as a new user</h1>-->
+  <!--<form action="/api/users" method="post">-->
+    <!--<fieldset>-->
+      <!--<div>-->
+        <!--<label for="email">Email:</label>-->
+        <!--<input type="text" name="email" value="smart.movies.database@gmail.com">-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--<label for="password">Password:</label>-->
+        <!--<input type="password" name="password" value="qrxuCKSCuDXlNfB0ewlt9S1eV2gylk">-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--<button type="submit">Register</button>-->
+      <!--</div>-->
+    <!--</fieldset>-->
+  <!--</form>-->
+<!--</section>-->
+
+
+<!--<div>-->
+
+  <!--<form #registrationForm="ngForm" (ngSubmit)="onSubmit()">-->
+    <!--<div>-->
+      <!--<label for="email">Email</label>-->
+      <!--<input type="text" [(ngModel)]="userInfo.email" id="email" name="email" required>-->
+    <!--</div>-->
+    <!--<div>-->
+      <!--<label for="password">Password</label>-->
+      <!--<input type="password" [(ngModel)]="userInfo.password" id="password" name = "password" required>-->
+    <!--</div>-->
+    <!--<button type="submit">Register</button>-->
+  <!--</form>-->
+<!--</div>-->

@@ -8,17 +8,17 @@ import { User } from '../DOM/User';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  private userInfo: User;
 
-  constructor(private authenticationService: AuthenticationService)
-  {}
+  constructor(private authenticationService: AuthenticationService) { }
 
-  ngOnInit(){
-    this.userInfo = new User();
+  user: User;
+
+  ngOnInit() {
+    this.user = new User();
   }
 
-  onSubmit(): void {
-    this.authenticationService.registerUser(this.userInfo).subscribe();
-  }
+  onSubmit(){
 
+    this.authenticationService.registerUser(this.user).subscribe();
+  }
 }

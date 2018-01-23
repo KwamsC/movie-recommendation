@@ -28,8 +28,9 @@ import { MessagesComponent } from './messages/messages.component';
 import { MovieService} from "./movie.service";
 import { MoviesComponent } from './movies/movies.component';
 import { FormBuilder} from "@angular/forms";
-import { RegisterService } from "./register.service"
 import {AuthenticationService} from "./authentication.service";
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import {AuthenticationService} from "./authentication.service";
     MovieSearchComponent,
     MessagesComponent,
     MoviesComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,7 @@ import {AuthenticationService} from "./authentication.service";
     )
 
   ],
-  providers: [ RatingsService, MessageService, MovieService, FormBuilder, RegisterService, AuthenticationService ],
+  providers: [ RatingsService, MessageService, MovieService, FormBuilder, AuthenticationService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
