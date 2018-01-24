@@ -11,8 +11,7 @@ import { MessageService } from './message.service';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
                              'x-ibm-client-id' : 'bdd51b94-4183-4ce5-9e83-47c76b76c11a',
-                             'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO',
-                             'Authorization' : 'UBIeyCA8qWHm6sRQJ0YxJBtlM5XYEhqABZloSEXDi42llyL4xVfUTkUHO2vw9KQS'})
+                             'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO',})
 };
 
 @Injectable()
@@ -20,7 +19,9 @@ export class MovieService {
   private access_token="jarmVjmEzf1vj8o8U9uKHVeH3WPVy1cdqK73w1P1wyFZGxOXE6IpbRdV9aUCu2SW";
   private space: "%22%7D&";
 
-  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&access_token=UBIeyCA8qWHm6sRQJ0YxJBtlM5XYEhqABZloSEXDi42llyL4xVfUTkUHO2vw9KQS';  // URL to web api
+  //private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&access_token=UBIeyCA8qWHm6sRQJ0YxJBtlM5XYEhqABZloSEXDi42llyL4xVfUTkUHO2vw9KQS';  // URL to web api
+  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0';
+
 
   constructor(
     private http: HttpClient,

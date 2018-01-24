@@ -2,12 +2,7 @@
   <li>
     <div class="row">
       <div class="col-md-12">
-        Login via
-        <div class="social-buttons">
-          <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-          <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
-        </div>
-        or
+        Login
         <form #loginForm="ngForm" (ngSubmit)="onSubmit()"method="post" action="login" accept-charset="UTF-8" id="login-nav">
           <div class="form-group">
             <label class="sr-only" for="email">Email address</label>
@@ -20,7 +15,7 @@
             <div class="help-block text-right"><a href="">Forget the password ?</a></div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block" routerLink="dashboard">Login</button>
+            <button type="submit" class="btn btn-primary btn-block" routerLink="movies">Login</button>
 
           </div>
           <div class="checkbox">

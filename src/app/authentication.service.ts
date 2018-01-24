@@ -6,7 +6,9 @@ import { map, tap, catchError} from 'rxjs/operators';
 import {User} from "./DOM/User";
 
 const httpOptions ={
-  headers : new HttpHeaders ({'Content-type':'application/json'})
+  headers : new HttpHeaders ({'Content-type': 'application/json',
+  'x-ibm-client-id' : 'bdd51b94-4183-4ce5-9e83-47c76b76c11a',
+  'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO'})
 };
 
 interface LoginOutput{
@@ -23,7 +25,7 @@ interface LoginOutput{
 @Injectable()
 export class AuthenticationService {
 
-  private customerUrl= "http://localhost:3000/api/users/";
+  private customerUrl= "https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/";
 
   constructor(private http: HttpClient) { }
 
@@ -37,7 +39,7 @@ export class AuthenticationService {
   }
 
   login(user:User):Observable<any>{
-    return this.http.post<LoginOutput>(this.customerUrl+"login", user,httpOptions).pipe(
+    return this.http.post<LoginOutput>(this.customerUrl+"login", user, httpOptions).pipe(
       map(loginOutput=>{
         //login succesful
         if(loginOutput.id && loginOutput.userId){

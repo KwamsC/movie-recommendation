@@ -1,3 +1,4 @@
+import { Authguard } from './_guards/authguard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +27,8 @@ import { LogoutComponent } from './logout/logout.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AutorizationInterceptorService} from "./autorization-interceptor.service";
 import {UnauthorizedInterceptorService} from "./unautorized-interceptor.service";
+import { AlertComponent } from './alert/alert.component';
+import { AlertService } from './alert.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import {UnauthorizedInterceptorService} from "./unautorized-interceptor.service"
     MoviesComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,8 @@ import {UnauthorizedInterceptorService} from "./unautorized-interceptor.service"
     MovieService,
     FormBuilder,
     AuthenticationService,
+    AlertService,
+    Authguard,
     { provide: HTTP_INTERCEPTORS,
       useClass: AutorizationInterceptorService,
       multi: true
