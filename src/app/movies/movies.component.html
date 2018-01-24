@@ -1,14 +1,8 @@
-<h2>My Movies</h2>
-
-<div>
-  <label>Movie name:
-    <input #movieName />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(movieName.value); movieName.value=''">
-    add
-  </button>
+<h2>My Heroes</h2>
+<div *ngIf="movie">
+  {{movie.name}}
 </div>
+<<<<<<< HEAD
 
 <ul class="heroes">
   <li *ngFor="let movie of movies">
@@ -19,3 +13,5 @@
             (click)="delete(movie)">x</button>
   </li>
 </ul>
+=======
+>>>>>>> 2ac450cb08874b14fb7980d20254e113dcdb20a5

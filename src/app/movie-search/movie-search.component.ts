@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject }    from 'rxjs/Subject';
 import { of }         from 'rxjs/observable/of';
 
-import {Movie} from "../movie";
+import {Movie} from "../DOM/movie";
 import { MovieService} from "../movie.service";
 import {
   debounceTime, distinctUntilChanged, switchMap

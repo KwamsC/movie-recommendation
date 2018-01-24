@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'ratings', component: RatingsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'movies', component: MoviesComponent },
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+
 
 ];
 
