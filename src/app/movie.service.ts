@@ -12,7 +12,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
                              'x-ibm-client-id' : 'bdd51b94-4183-4ce5-9e83-47c76b76c11a',
                              'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO',
-                             'Authorization' : 'YjgTc2PquE76UYA4c6zFevueUATAnZ8ss39OPCVEYFdO7PFhzdwpUho9hEr6nWCm'})
+                             'Authorization' : 'UBIeyCA8qWHm6sRQJ0YxJBtlM5XYEhqABZloSEXDi42llyL4xVfUTkUHO2vw9KQS'})
 };
 
 @Injectable()
@@ -20,20 +20,12 @@ export class MovieService {
   private access_token="jarmVjmEzf1vj8o8U9uKHVeH3WPVy1cdqK73w1P1wyFZGxOXE6IpbRdV9aUCu2SW";
   private space: "%22%7D&";
 
-<<<<<<< HEAD
-  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&access_token=QAqzFRqZ36gibUtipswc2U5gRLj41nWAZ9p84iG8FDXxs0QBi7szDToe7vTrTCGZ';  // URL to web api
-=======
-
-  private moviesUrl = "http://localhost:3000/api/movies?filters[limit]=50"+this.space+this.access_token;
-  //
-  //   "http://localhost:3000/api/movies/findOne?filter=%7B%22imdb_id%22%3A%20%22tt0086336%22%7D&access_token=jarmVjmEzf1vj8o8U9uKHVeH3WPVy1cdqK73w1P1wyFZGxOXE6IpbRdV9aUCu2SW";  // URL to web api
->>>>>>> 2ac450cb08874b14fb7980d20254e113dcdb20a5
+  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&access_token=UBIeyCA8qWHm6sRQJ0YxJBtlM5XYEhqABZloSEXDi42llyL4xVfUTkUHO2vw9KQS';  // URL to web api
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
 
-<<<<<<< HEAD
   /** GET heroes from the server */
   getMovies (): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.moviesUrl, httpOptions)
@@ -56,8 +48,6 @@ export class MovieService {
         catchError(this.handleError<Movie>(`getMovie id=${id}`))
       );
   }
-=======
->>>>>>> 2ac450cb08874b14fb7980d20254e113dcdb20a5
 
   // getMovie(): Observable<Movie>{
   // return this.http.get<Movie>(this.moviesUrl).pipe(
