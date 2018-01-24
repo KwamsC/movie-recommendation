@@ -10,10 +10,10 @@ const httpOptions ={
 };
 
 interface LoginOutput{
-  id: string,
-  ttl:number,
-  created:string,
-  userId: string
+  id: string;
+  ttl: number;
+  created: string;
+  userId: string;
 }
 
 
@@ -28,9 +28,9 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
 
-  registerUser(user:User):Observable<User>{
-    return this.http.post<User>(this.customerUrl, user,httpOptions).pipe(
-      tap((user:User)=>console.log('Created customer with id ='+user.id)),
+  registerUser(user: User): Observable<User> {
+    return this.http.post<User>(this.customerUrl, user, httpOptions).pipe(
+      tap((user : User)=>console.log('Created customer with id ='+user.id)),
       catchError(this.handleError<User>('registerUser'))
     );
 

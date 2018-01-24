@@ -11,7 +11,7 @@ export class AutorizationInterceptorService implements HttpInterceptor{
     if(currentUser && accessToken){
       console.log("Adding Authorization header: "+accessToken);
       request = request.clone({
-        headers:  request.headers.set('Authorization',accessToken)
+        headers:  request.headers.set('Authorization', accessToken)
 
       });
 

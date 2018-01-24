@@ -18,7 +18,7 @@ const httpOptions = {
 @Injectable()
 export class MovieService {
 
-  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';  // URL to web api
+  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&access_token=QAqzFRqZ36gibUtipswc2U5gRLj41nWAZ9p84iG8FDXxs0QBi7szDToe7vTrTCGZ';  // URL to web api
 
   constructor(
     private http: HttpClient,
@@ -26,7 +26,7 @@ export class MovieService {
 
   /** GET heroes from the server */
   getMovies (): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.moviesUrl)
+    return this.http.get<Movie[]>(this.moviesUrl, httpOptions)
       .pipe(
         tap(movies => this.log(`fetched Movies`)),
         catchError(this.handleError('getMovies', []))
