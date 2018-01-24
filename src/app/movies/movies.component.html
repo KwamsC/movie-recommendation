@@ -1,14 +1,20 @@
-<h2>My Heroes</h2>
-<div *ngIf="movie">
-  {{movie.name}}
-</div>
+<app-navbar></app-navbar>
+<h2>My Movies</h2>
 
 <ul class="heroes">
-  <li *ngFor="let movie of movies">
-    <a routerLink="/detail/{{movie.id}}">
-      <span class="badge">{{movie.title}}</span> {{movie.name}}
-    </a>
-    <button class="delete" title="delete movie"
-            (click)="delete(movie)">x</button>
-  </li>
+  <div *ngFor="let movie of movies">
+    <div class="container">
+      <div class="col-md-4">
+        <div class="card card-01 height-fix">
+          <img class="card-img-top" src="http://res.cloudinary.com/amritvirk23/image/upload/v1506061057/poc.jpg" alt="Card image cap">
+          <div class="card-img-overlay">
+            <h4 class="card-title"><strong>{{movie.title}}</strong></h4>
+            <p class="card-text">{{movie.release_date}}</p>
+            <p class="card-text"><a href="#" class="fa fa-bookmark-o"></a><a class="fa fa-heart-o" href="#"></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ul>
+

@@ -55,7 +55,7 @@ export class AuthenticationService {
 
   logout():Observable<any>{
     let accessToken=localStorage.getItem('accessToken');
-    return this.http.post(this.customerUrl+"/logout", httpOptions).pipe(
+    return this.http.post(this.customerUrl+"logout", httpOptions).pipe(
       tap(()=>{
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
