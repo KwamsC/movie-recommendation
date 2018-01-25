@@ -9,7 +9,7 @@
 <div class="row">
   <div *ngFor="let movie of movies" class="col-md-3">
         <div class="card card-01 height-fix">
-          <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" alt="Card image cap">
+          <a [routerLink] = "['/movies/', movie.id]"><img class="card-img-top" src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" alt="Card image cap"></a>
           <div class="card-img-overlay">
             <h4 class="card-title"><strong>{{movie.title}}</strong></h4>
             <p class="card-text">{{movie.release_date}}</p>

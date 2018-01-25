@@ -1,3 +1,4 @@
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: 'movies', component: MoviesComponent, canActivate: [Authguard] },
   { path: 'register', component: RegisterComponent},
-
+  { path: 'movies/:id', component: MovieDetailComponent, canActivate: [Authguard]}
 
 ];
 

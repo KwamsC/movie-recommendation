@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Movie} from "../DOM/movie";
-import {MovieService} from "../movie.service";
+import { Movie } from '../DOM/movie';
+import { MovieService } from '../movie.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -10,11 +11,12 @@ import {MovieService} from "../movie.service";
 })
 export class MoviesComponent implements OnInit {
   movie: Movie;
-  id: "3613903f7d93fadc7ba5817b87938c44";
+
 
   movies: Movie[];
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getMovies();
@@ -26,7 +28,9 @@ export class MoviesComponent implements OnInit {
   }
 
   getMovie(): void {
-    this.movieService.getMovie(this.id).subscribe(movie => this.movie = movie);
+    const id = this.route.snapshot.paramMap.get('id');
+    this.movieService.getMovie(id)
+      .subscribe(movie => this.movie = movie);
   }
 
   sortAsc() {

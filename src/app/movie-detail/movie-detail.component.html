@@ -1,12 +1,30 @@
 <div *ngIf="movie">
 
-  <h2>{{ movie.name | uppercase }} Details</h2>
-  <div><span>id: </span>{{movie.id}}</div>
+  <h2>{{ movie.title | uppercase }} Details</h2>
+  <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/{{movie.poster}}">
+ 
   <div>
-    <label>name:
-      <input [(ngModel)]="movie.title" placeholder="name"/>
-    </label>
+    <label>language: {{movie.language}}</label>
   </div>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+  <div>
+    <label>Genres:</label>
+    <div *ngFor="let genre of movie.genres">
+       <ul>
+         <li>{{genre}}</li>
+       </ul>
+    </div>
+  </div>
+  <div>
+    <label>runtime: {{movie.runtime}}</label>
+  </div>
+  <div>
+    <label>release date: {{movie.release_date}}</label>
+  </div>
+  <div>
+    <label>Overview:</label>
+    <p>
+      {{movie.overview}}
+    </p>
+  </div>
+
 </div>

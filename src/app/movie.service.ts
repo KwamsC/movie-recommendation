@@ -21,6 +21,7 @@ export class MovieService {
 
   //private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&access_token=UBIeyCA8qWHm6sRQJ0YxJBtlM5XYEhqABZloSEXDi42llyL4xVfUTkUHO2vw9KQS';  // URL to web api
   private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0';
+  private singleMovieUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
 
 
   constructor(
@@ -81,8 +82,8 @@ export class MovieService {
   //
   // /** GET hero by id. Will 404 if id not found */
   getMovie(id: string): Observable<Movie> {
-    const url = `${this.moviesUrl}/${id}`;
-    return this.http.get<Movie>(url).pipe(
+    const url = `${this.singleMovieUrl}/${id}`;
+    return this.http.get<Movie>(url, httpOptions).pipe(
       tap(_ => this.log(`fetched movie id=${id}`)),
       catchError(this.handleError<Movie>(`getMovie id=${id}`))
     );

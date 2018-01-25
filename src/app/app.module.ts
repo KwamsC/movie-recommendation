@@ -29,6 +29,7 @@ import {AutorizationInterceptorService} from "./autorization-interceptor.service
 import {UnauthorizedInterceptorService} from "./unautorized-interceptor.service";
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AlertService } from './alert.service';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    AlertComponent
+    AlertComponent,
+    MovieDetailComponent
   ],
   imports: [
     BrowserModule,
