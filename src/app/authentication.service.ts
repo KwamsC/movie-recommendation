@@ -5,8 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map, tap, catchError} from 'rxjs/operators';
 import {User} from "./DOM/User";
+import { Router } from '@angular/router';
 
-const httpOptions ={
+const httpOptions = {
   headers : new HttpHeaders ({'Content-type': 'application/json',
   'x-ibm-client-id' : 'bdd51b94-4183-4ce5-9e83-47c76b76c11a',
   'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO'})
@@ -29,7 +30,8 @@ export class AuthenticationService {
   private customerUrl= "https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/";
 
   constructor(private http: HttpClient,
-              private alertService: AlertService) { }
+              private alertService: AlertService,
+              private router: Router) { }
 
 
   registerUser(user: User): Observable<User> {
@@ -45,8 +47,9 @@ export class AuthenticationService {
       map(loginOutput=>{
         //login succesful
         if(loginOutput.id && loginOutput.userId){
-          localStorage.setItem('currentUser',loginOutput.userId);
-          localStorage.setItem('accessToken',loginOutput.id);
+          localStorage.setItem('currentUser', loginOutput.userId);
+          localStorage.setItem('accessToken', loginOutput.id);
+          this.router.navigate(['movies']);
         }
         return loginOutput;
       }),
@@ -60,17 +63,18 @@ export class AuthenticationService {
   logout(): Observable<any> {
     let accessToken = localStorage.getItem('accessToken');
 
-    // console.log("Purging current user and accessToken");
-
-    // localStorage.removeItem('currentUser');
-    // localStorage.removeItem('accessToken');
-
     console.log('Starting Logout Process...');
     return this.http.post(this.customerUrl + 'logout' , httpOptions).pipe(
       tap(() => {
         console.log('Logout Process Successful...');
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
+
+        if (location.pathname === '/') {
+          location.reload();
+        } else {
+          this.router.navigate(['']);
+        }
       }),
       catchError(this.handleError('logout Customer'))
     );

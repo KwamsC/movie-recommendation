@@ -23,6 +23,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
 
     this.authenticationService.login(this.user).subscribe();
-    this.router.navigate(['movies']);
+
   }
 }

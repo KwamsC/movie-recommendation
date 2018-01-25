@@ -19,12 +19,6 @@ export class LogoutComponent implements OnInit {
 
     this.authenticationService.logout().subscribe();
 
-    if (location.pathname === '/') {
-      location.reload();
-    } else {
-      this.router.navigate(['']);
-    }
-
   }
 
 }
