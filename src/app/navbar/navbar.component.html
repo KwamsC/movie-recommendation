@@ -11,7 +11,7 @@
 
 
     <div class="collapse navbar-collapse" id="exCollapsingNavbar">
-      <div *ngIf="loggedIn">
+      <div *ngIf="checkLogin()">
         <ul class="nav navbar-nav">
           <li class="nav-item"><a href="#" class="nav-link">Service</a></li>
           <li class="nav-item"><a href="#" class="nav-link">Movies</a></li>
@@ -30,10 +30,10 @@
 
       <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
         <li class="dropdown order-1">
-         <div *ngIf="loggedIn">
+         <div *ngIf="checkLogin()">
            <app-logout></app-logout>
          </div>
-          <div *ngIf="!loggedIn">
+          <div *ngIf="!checkLogin()">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Register/Login <span class="caret"></span></button>
 
           <app-login></app-login>

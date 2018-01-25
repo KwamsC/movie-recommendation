@@ -1,3 +1,4 @@
+import { AlertService } from './alert.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -27,7 +28,8 @@ export class AuthenticationService {
 
   private customerUrl= "https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private alertService: AlertService) { }
 
 
   registerUser(user: User): Observable<User> {
@@ -53,19 +55,35 @@ export class AuthenticationService {
 
   }
 
-  logout():Observable<any>{
-    let accessToken=localStorage.getItem('accessToken');
-    return this.http.post(this.customerUrl+"logout", httpOptions).pipe(
-      tap(()=>{
+
+  /// WE HAVE TO DO THE API STUFF FOR THIS AND P
+  logout(): Observable<any> {
+    let accessToken = localStorage.getItem('accessToken');
+
+    // console.log("Purging current user and accessToken");
+
+    // localStorage.removeItem('currentUser');
+    // localStorage.removeItem('accessToken');
+
+    console.log('Starting Logout Process...');
+    return this.http.post(this.customerUrl + 'logout' , httpOptions).pipe(
+      tap(() => {
+        console.log('Logout Process Successful...');
         localStorage.removeItem('currentUser');
         localStorage.removeItem('accessToken');
-        console.log("succesfully logged out user");
       }),
       catchError(this.handleError('logout Customer'))
     );
   }
 
   private handleError<T> (operation = 'operation', result?: T){
+    if (operation === 'login Costumer') {
+      this.alertService.error('Username and password combination incorrect.');
+    }  else if (operation === 'logout Costumer') {
+      this.alertService.error('Logout Api not Set Up.');
+    }
+
+    
     return(error: any): Observable<T> => {
       console.error(error);
       //return the empty result so the application keeps running

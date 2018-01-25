@@ -44,7 +44,6 @@ export class UnauthorizedInterceptorService {
           // redirect to login
           this.router.navigate(['']);
 
-          this.alertService.error('Please Log in before using this functionality.', true);
         }
       }
       // return the empty result so the application keeps running

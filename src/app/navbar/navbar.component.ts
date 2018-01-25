@@ -8,14 +8,14 @@ import { Component, OnInit, Injectable } from '@angular/core';
 
 @Injectable()
 export class NavbarComponent implements OnInit {
-  private loggedIn = false;
 
   constructor() { }
 
   ngOnInit() {
-    if (localStorage.getItem('currentUser') && localStorage.getItem('accessToken')) {
-      this.loggedIn = true;
-    }
 
   }
+
+  checkLogin() {
+    return (localStorage.getItem('currentUser') && localStorage.getItem('accessToken'));
+   }
 }

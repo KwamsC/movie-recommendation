@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 
@@ -8,14 +9,21 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
-  onSubmit(){
+  onSubmit() {
 
     this.authenticationService.logout().subscribe();
+
+    if (location.pathname === '/') {
+      location.reload();
+    } else {
+      this.router.navigate(['']);
+    }
 
   }
 

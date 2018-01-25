@@ -10,10 +10,6 @@ import {MovieService} from "../movie.service";
   styleUrls: ['./movielist.component.css']
 })
 export class MovielistComponent implements OnInit {
-  movies=Movie[]
-  selectedMovie: M;
-
-
   constructor() { }
 
   ngOnInit() {
