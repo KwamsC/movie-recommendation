@@ -19,7 +19,7 @@ export class MoviesComponent implements OnInit {
   ngOnInit() {
     this.getMovies();
   }
- 
+
 
   getMovies(): void {
     this.movieService.getMovies().subscribe(movies => this.movies = movies);
@@ -28,4 +28,21 @@ export class MoviesComponent implements OnInit {
   getMovie(): void {
     this.movieService.getMovie(this.id).subscribe(movie => this.movie = movie);
   }
+
+  sortAsc() {
+    this.movies.sort((m1, m2) => {
+      if(m1.title > m2.title) return 1;
+      if(m1.title === m2.title) return 0;
+      if(m1.title < m2.title) return -1;
+    })
+  }
+
+  sortDesc() {
+    this.movies.sort((m1, m2) => {
+      if(m1.title > m2.title) return -1;
+      if(m1.title === m2.title) return 0;
+      if(m1.title < m2.title) return 1;
+    })
+  }
+
 }
