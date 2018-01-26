@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../DOM/movie';
 import { MovieService } from '../movie.service';
 import { ActivatedRoute } from '@angular/router';
+import { Watchlist} from "../DOM/watchlist";
 
 @Component({
   selector: 'app-movies',
@@ -10,7 +11,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
+  watchlist: Watchlist;
   movie: Movie;
+  watchlists: Watchlist[];
 
 
   movies: Movie[];
@@ -20,18 +23,25 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit() {
     this.getMovies();
+    this.getWatchlists();
   }
 
 
   getMovies(): void {
     this.movieService.getMovies().subscribe(movies => this.movies = movies);
   }
+  //
+  // getMovie(): void {
+  //   const id = this.route.snapshot.paramMap.get('id');
+  //   this.movieService.getMovie(id)
+  //     .subscribe(movie => this.movie = movie);
+  // }
 
-  getMovie(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.movieService.getMovie(id)
-      .subscribe(movie => this.movie = movie);
+  getWatchlists(): void {
+    this.movieService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
   }
+
+
 
   sortAsc() {
     this.movies.sort((m1, m2) => {

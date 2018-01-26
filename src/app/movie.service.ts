@@ -21,6 +21,7 @@ export class MovieService {
   private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0';
   private singleMovieUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
   private listUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/me/watchlists';
+  private movielisturl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/watchlists'
 
 
   constructor(
@@ -34,18 +35,6 @@ export class MovieService {
         tap(movies => this.log(`fetched Movies`)),
         catchError(this.handleError('getMovies', []))
       );
-  }
-
-
-  createWatchlist(watchlist: Watchlist): Observable<Watchlist> {
-    return this.http.post<Watchlist>(this.listUrl, watchlist, httpOptions).pipe(
-      tap((watchlist : Watchlist)=>console.log('Created customer with id ='+watchlist.name)),
-      catchError(this.handleError<Watchlist>('create list'))
-    );
-  }
-
-  deleteWatchlist(){
-
   }
 
   /** GET hero by id. Return `undefined` when id not found */
@@ -63,35 +52,48 @@ export class MovieService {
   }
 
 
+  /** Watchlists*/
 
+  createWatchlist(watchlist: Watchlist): Observable<Watchlist> {
+    return this.http.post<Watchlist>(this.listUrl, watchlist, httpOptions).pipe(
+      tap((watchlist : Watchlist)=>console.log('Created customer with id ='+watchlist.name)),
+      catchError(this.handleError<Watchlist>('create list'))
+    );
+  }
+
+  deleteWatchlist(){
+
+  }
+
+  getWatchlists (): Observable<Watchlist[]> {
+    return this.http.get<Watchlist[]>(this.listUrl, httpOptions)
+      .pipe(
+        tap(watchlists => this.log(`fetched Watchlists`)),
+        catchError(this.handleError('lists', []))
+      );
+  }
+
+  getMoviesFromlist(id: string): Observable<Watchlist> {
+    const url = `${this.movielisturl}/${id}/movies`;
+    return this.http.get<Watchlist>(url, httpOptions).pipe(
+      tap(_ => this.log(`fetched movie id=${id}`)),
+      catchError(this.handleError<Watchlist>(`getMovie id=${id}`))
+    );
+  }
+
+  AddmovieToWatchlist (movie: Movie, id: string): Observable<Movie> {
+    const url = `${this.movielisturl}/${id}/movies`;
+    return this.http.post<Movie>(url, movie, httpOptions).pipe(
+      tap((movie: Movie) => this.log(`added movie w/ id=${movie.id}`)),
+      catchError(this.handleError<Movie>('addMovie'))
+    );
+  }
 
   // getMovie(): Observable<Movie>{
   // return this.http.get<Movie>(this.moviesUrl).pipe(
   //       tap(movie => this.log(`fetched movie id=`+movie.id)),
   //       catchError(this.handleError<Movie>(`getMovie id=`)))
   // }
-  // /** GET hero by id. Return `undefined` when id not found */
-  // getMovieNo404<Data>(id: number): Observable<Movie> {
-  //   const url = `${this.moviesUrl}/?id=${id}`;
-  //   return this.http.get<Movie[]>(url)
-  //     .pipe(
-  //       map(movies => movies[0]), // returns a {0|1} element array
-  //       tap(h => {
-  //         const outcome = h ? `fetched` : `did not find`;
-  //         this.log(`${outcome} movie id=${id}`);
-  //       }),
-  //       catchError(this.handleError<Movie>(`getMovie id=${id}`))
-  //     );
-  // }
-  //
-  // /** GET hero by id. Will 404 if id not found */
-  getMovie(id: string): Observable<Movie> {
-    const url = `${this.singleMovieUrl}/${id}`;
-    return this.http.get<Movie>(url, httpOptions).pipe(
-      tap(_ => this.log(`fetched movie id=${id}`)),
-      catchError(this.handleError<Movie>(`getMovie id=${id}`))
-    );
-  }
 
   /* GET heroes whose name contains search term */
   searchMovies(term: string): Observable<Movie[]> {
@@ -103,39 +105,6 @@ export class MovieService {
     return this.http.get<Movie[]>(`https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&filter%5Bwhere%5D%5Btitle%5D%5Blike%5D=${term}`, httpOptions).pipe(
       tap(_ => this.log(`found movies matching "${term}"`)),
       catchError(this.handleError<Movie[]>('searchMovies', []))
-    );
-  }
-
-  //////// Save methods //////////
-
-  /** POST: add a new hero to the server */
-
-
-
-
-  addMovie (movie: Movie): Observable<Movie> {
-    return this.http.post<Movie>(this.moviesUrl, movie, httpOptions).pipe(
-      tap((movie: Movie) => this.log(`added movie w/ id=${movie.id}`)),
-      catchError(this.handleError<Movie>('addMovie'))
-    );
-  }
-
-  /** DELETE: delete the hero from the server */
-  deleteMovie (movie: Movie | number): Observable<Movie> {
-    const id = typeof movie === 'number' ? movie : movie.id;
-    const url = `${this.moviesUrl}/${id}`;
-
-    return this.http.delete<Movie>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted movie id=${id}`)),
-      catchError(this.handleError<Movie>('deleteMovie'))
-    );
-  }
-
-  /** PUT: update the hero on the server */
-  updateMovie (movie: Movie): Observable<any> {
-    return this.http.put(this.moviesUrl, movie, httpOptions).pipe(
-      tap(_ => this.log(`updated movie id=${movie.id}`)),
-      catchError(this.handleError<any>('updateMovie'))
     );
   }
 
@@ -163,7 +132,48 @@ export class MovieService {
   private log(message: string) {
     this.messageService.add('MovieService' + message);
   }
+
+
+
+
+
+
+
+
+
+
+
+  //////// Save methods //////////
+
+  /** POST: add a new hero to the server */
+  addMovie (movie: Movie): Observable<Movie> {
+    return this.http.post<Movie>(this.moviesUrl, movie, httpOptions).pipe(
+      tap((movie: Movie) => this.log(`added movie w/ id=${movie.id}`)),
+      catchError(this.handleError<Movie>('addMovie'))
+    );
+  }
+
+  /** DELETE: delete the hero from the server */
+  deleteMovie (movie: Movie | number): Observable<Movie> {
+    const id = typeof movie === 'number' ? movie : movie.id;
+    const url = `${this.moviesUrl}/${id}`;
+
+    return this.http.delete<Movie>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted movie id=${id}`)),
+      catchError(this.handleError<Movie>('deleteMovie'))
+    );
+  }
+
+  /** PUT: update the hero on the server */
+  updateMovie (movie: Movie): Observable<any> {
+    return this.http.put(this.moviesUrl, movie, httpOptions).pipe(
+      tap(_ => this.log(`updated movie id=${movie.id}`)),
+      catchError(this.handleError<any>('updateMovie'))
+    );
+  }
 }
+
+
 
 
 /*
