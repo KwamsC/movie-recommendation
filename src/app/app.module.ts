@@ -1,3 +1,4 @@
+import { ModalComponent } from './modal/modal.component';
 import { Authguard } from './_guards/authguard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -12,26 +13,24 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { RatingsComponent } from './ratings/ratings.component';
 import { RegisterComponent } from './register/register.component';
+import { MovieSearchComponent } from './movie-search/movie-search.component';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import {MovielistComponent} from "./movielist/movielist.component";
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { MoviesComponent } from './movies/movies.component';
 
 // Services
 import { MessageService } from './message.service';
 import { RatingsService } from './ratings.service';
-import { MovieSearchComponent } from './movie-search/movie-search.component';
-import { MessagesComponent } from './messages/messages.component';
 import { MovieService} from "./movie.service";
-import { MoviesComponent } from './movies/movies.component';
 import { FormBuilder} from "@angular/forms";
 import {AuthenticationService} from "./authentication.service";
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AutorizationInterceptorService} from "./autorization-interceptor.service";
 import {UnauthorizedInterceptorService} from "./unautorized-interceptor.service";
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
-import { MovieDetailComponent } from './movie-detail/movie-detail.component';
-import {MovielistComponent} from "./movielist/movielist.component";
-import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import { ModalComponent } from './modal/modal.component';
     HomeComponent,
     RatingsComponent,
     MovieSearchComponent,
-    MessagesComponent,
     MoviesComponent,
     RegisterComponent,
     LoginComponent,

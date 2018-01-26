@@ -20,6 +20,7 @@ const httpOptions = {
 export class MovieService {
   private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
   private listUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/me/watchlists';
+  private movielisturl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/watchlists'
 
 
   constructor(
@@ -40,6 +41,22 @@ export class MovieService {
       );
   }
 
+  /** GET hero by id. Return `undefined` when id not found */
+  getMovieNo404<Data>(id: number): Observable<Movie> {
+    const url = `${this.moviesUrl}/?id=${id}`;
+    return this.http.get<Movie[]>(url)
+      .pipe(
+        map(movies => movies[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? `fetched` : `did not find`;
+          this.log(`${outcome} movie id=${id}`);
+        }),
+        catchError(this.handleError<Movie>(`getMovie id=${id}`))
+      );
+  }
+
+
+  /** Watchlists*/
 
   createWatchlist(watchlist: Watchlist): Observable<Watchlist> {
     return this.http.post<Watchlist>(this.listUrl, watchlist, httpOptions).pipe(
@@ -65,22 +82,31 @@ export class MovieService {
     );
   }
 
-  /** GET hero by id. Return `undefined` when id not found */
-  getMovieNo404<Data>(id: number): Observable<Movie> {
-    const url = `${this.moviesUrl}/?id=${id}`;
-    return this.http.get<Movie[]>(url)
-      .pipe(
-        map(movies => movies[0]), // returns a {0|1} element array
-        tap(h => {
-          const outcome = h ? `fetched` : `did not find`;
-          this.log(`${outcome} movie id=${id}`);
-        }),
-        catchError(this.handleError<Movie>(`getMovie id=${id}`))
-      );
+  // /** GET hero by id. Return `undefined` when id not found */
+  // getMovieNo404<Data>(id: number): Observable<Movie> {
+  //   const url = `${this.moviesUrl}/?id=${id}`;
+  //   return this.http.get<Movie[]>(url)
+  //     .pipe(
+  //       tap(watchlists => this.log(`fetched Watchlists`)),
+  //       catchError(this.handleError('lists', []))
+  //     );
+  // }
+
+  getMoviesFromlist(id: string): Observable<Watchlist> {
+    const url = `${this.movielisturl}/${id}/movies`;
+    return this.http.get<Watchlist>(url, httpOptions).pipe(
+      tap(_ => this.log(`fetched movie id=${id}`)),
+      catchError(this.handleError<Watchlist>(`getMovie id=${id}`))
+    );
   }
 
-
-
+  AddmovieToWatchlist (movie: Movie, id: string): Observable<Movie> {
+    const url = `${this.movielisturl}/${id}/movies`;
+    return this.http.post<Movie>(url, movie, httpOptions).pipe(
+      tap((movie: Movie) => this.log(`added movie w/ id=${movie.id}`)),
+      catchError(this.handleError<Movie>('addMovie'))
+    );
+  }
 
   // getMovie(): Observable<Movie>{
   // return this.http.get<Movie>(this.moviesUrl).pipe(
@@ -124,13 +150,50 @@ export class MovieService {
     );
   }
 
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    this.messageService.add('MovieService' + message);
+  }
+
+  getWatchlists (): Observable<Watchlist[]> {
+    return this.http.get<Watchlist[]>(this.listUrl, httpOptions)
+      .pipe(
+        tap(watchlists => this.log(`fetched Watchlists`)),
+        catchError(this.handleError('lists', []))
+      );
+  }
+
+
+
+
+
+
+
+
+
   //////// Save methods //////////
 
   /** POST: add a new hero to the server */
-
-
-
-
   addMovie (movie: Movie): Observable<Movie> {
     return this.http.post<Movie>(this.moviesUrl, movie, httpOptions).pipe(
       tap((movie: Movie) => this.log(`added movie w/ id=${movie.id}`)),
@@ -156,32 +219,9 @@ export class MovieService {
       catchError(this.handleError<any>('updateMovie'))
     );
   }
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-
-  /** Log a HeroService message with the MessageService */
-  private log(message: string) {
-    this.messageService.add('MovieService' + message);
-  }
 }
+
+
 
 
 /*
