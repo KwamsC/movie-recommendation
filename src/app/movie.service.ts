@@ -7,6 +7,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Movie} from "./DOM/movie";
 import { MessageService } from './message.service';
+import {User} from "./DOM/User";
+import {Watchlist} from "./DOM/watchlist";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -16,12 +18,9 @@ const httpOptions = {
 
 @Injectable()
 export class MovieService {
-  private access_token="jarmVjmEzf1vj8o8U9uKHVeH3WPVy1cdqK73w1P1wyFZGxOXE6IpbRdV9aUCu2SW";
-  private space: "%22%7D&";
-
-  //private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&access_token=UBIeyCA8qWHm6sRQJ0YxJBtlM5XYEhqABZloSEXDi42llyL4xVfUTkUHO2vw9KQS';  // URL to web api
   private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0';
   private singleMovieUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
+  private listUrl = '';
 
 
   constructor(
@@ -35,6 +34,14 @@ export class MovieService {
         tap(movies => this.log(`fetched Movies`)),
         catchError(this.handleError('getMovies', []))
       );
+  }
+
+
+  createWatchlist(watchlist: Watchlist): Observable<Watchlist> {
+    return this.http.post<Watchlist>(this.listUrl, watchlist, httpOptions).pipe(
+      tap((watchlist : Watchlist)=>console.log('Created customer with id ='+watchlist.name)),
+      catchError(this.handleError<Watchlist>('create list'))
+    );
   }
 
   /** GET hero by id. Return `undefined` when id not found */
@@ -51,21 +58,14 @@ export class MovieService {
       );
   }
 
+
+
+
   // getMovie(): Observable<Movie>{
   // return this.http.get<Movie>(this.moviesUrl).pipe(
   //       tap(movie => this.log(`fetched movie id=`+movie.id)),
   //       catchError(this.handleError<Movie>(`getMovie id=`)))
   // }
-
-  // /** GET heroes from the server */
-  // getMovies (movie:Movie): Observable<Movie[]> {
-  //   return this.http.get<Movie[]>(this.moviesUrl)
-  //     .pipe(
-  //       tap(movies => this.log(`fetched Movies`+movie.id)),
-  //       catchError(this.handleError('getMovies', []))
-  //     );
-  // }
-  //
   // /** GET hero by id. Return `undefined` when id not found */
   // getMovieNo404<Data>(id: number): Observable<Movie> {
   //   const url = `${this.moviesUrl}/?id=${id}`;
@@ -95,7 +95,8 @@ export class MovieService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Movie[]>(`api/movies/?name=${term}`).pipe(
+
+    return this.http.get<Movie[]>(`https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&filter%5Bwhere%5D%5Btitle%5D%5Blike%5D=${term}`, httpOptions).pipe(
       tap(_ => this.log(`found movies matching "${term}"`)),
       catchError(this.handleError<Movie[]>('searchMovies', []))
     );
@@ -104,6 +105,10 @@ export class MovieService {
   //////// Save methods //////////
 
   /** POST: add a new hero to the server */
+
+
+
+
   addMovie (movie: Movie): Observable<Movie> {
     return this.http.post<Movie>(this.moviesUrl, movie, httpOptions).pipe(
       tap((movie: Movie) => this.log(`added movie w/ id=${movie.id}`)),

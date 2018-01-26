@@ -4,12 +4,12 @@ import { Observable } from 'rxjs/Observable';
 import { Subject }    from 'rxjs/Subject';
 import { of }         from 'rxjs/observable/of';
 
-import {Movie} from "../DOM/movie";
-import { MovieService} from "../movie.service";
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 
+import {Movie} from "../DOM/movie";
+import {MovieService} from "../movie.service";
 
 @Component({
   selector: 'app-movie-search',
@@ -18,7 +18,6 @@ import {
 })
 export class MovieSearchComponent implements OnInit {
   movies$: Observable<Movie[]>;
-
   private searchTerms = new Subject<string>();
 
   constructor(private movieService: MovieService) {}

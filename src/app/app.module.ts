@@ -30,6 +30,7 @@ import {UnauthorizedInterceptorService} from "./unautorized-interceptor.service"
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import {MovielistComponent} from "./movielist/movielist.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component';
     LoginComponent,
     LogoutComponent,
     AlertComponent,
-    MovieDetailComponent
+    MovieDetailComponent,
+    MovielistComponent
   ],
   imports: [
     BrowserModule,

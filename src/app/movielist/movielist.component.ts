@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie} from "../DOM/movie";
+import { Watchlist} from "../DOM/watchlist";
 import { MoviesComponent} from "../movies/movies.component";
 import {MovieService} from "../movie.service";
 
@@ -10,9 +11,14 @@ import {MovieService} from "../movie.service";
   styleUrls: ['./movielist.component.css']
 })
 export class MovielistComponent implements OnInit {
-  constructor() { }
+  watchlist: Watchlist;
+
+  constructor(private movieService: MovieService) { }
 
   ngOnInit() {
   }
 
+  onSubmit(){
+    this.movieService.createWatchlist(this.watchlist).subscribe();
+  }
 }

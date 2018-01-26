@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-
     this.authenticationService.registerUser(this.user).subscribe();
   }
 }
