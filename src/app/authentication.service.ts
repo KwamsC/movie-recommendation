@@ -59,7 +59,7 @@ export class AuthenticationService {
   }
 
 
-  /// WE HAVE TO DO THE API STUFF FOR THIS AND P
+
   logout(): Observable<any> {
     let accessToken = localStorage.getItem('accessToken');
 

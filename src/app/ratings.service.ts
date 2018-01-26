@@ -19,6 +19,8 @@ export class RatingsService {
   // Define the address of the ratings on the resource server
   private ratingsUrl = 'api/ratings';
 
+
+
   constructor(private http: HttpClient,
   private messageService: MessageService) {  }
 
@@ -28,9 +30,39 @@ export class RatingsService {
   }
 
   /**
-  * Fetch all user ratings made by the user
+  * Fetch all user ratings
   */
   getRatings(): Observable<Rating[]> {
+    return this.http.get<Rating[]>(this.ratingsUrl)
+    .pipe(
+      tap(ratings => this.log(`fetched ratings`),
+          catchError(this.handleError('getRatings', [])))
+    );
+  }
+
+
+  /**
+   * Fetch all ratings related to a User
+   * @param userId - a well formated string representing the UserID
+   */
+  getRatingsByUser(userId: String): Observable<Rating[]> {
+    const url = `${this.ratingsUrl}/filter[where][userId]=${userId}`;
+
+    return this.http.get<Rating[]>(this.ratingsUrl)
+    .pipe(
+      tap(ratings => this.log(`fetched ratings`),
+          catchError(this.handleError('getRatings', [])))
+    );
+
+  }
+
+  /**
+   * Fetch all ratings related to a Movie
+   * @param movieId - a well formated string representing the movie ID
+   */
+  getRatingsByMovie(movieId: String): Observable<Rating[]> {
+    const url = `${this.ratingsUrl}/filter[where][movieId]=${movieId}`;
+
     return this.http.get<Rating[]>(this.ratingsUrl)
     .pipe(
       tap(ratings => this.log(`fetched ratings`),
