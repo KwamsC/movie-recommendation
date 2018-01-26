@@ -31,6 +31,7 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import {MovielistComponent} from "./movielist/movielist.component";
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {MovielistComponent} from "./movielist/movielist.component";
     LogoutComponent,
     AlertComponent,
     MovieDetailComponent,
-    MovielistComponent
+    MovielistComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

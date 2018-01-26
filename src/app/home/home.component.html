@@ -2,6 +2,7 @@
 <body>
 <main role="main">
   <app-alert></app-alert>
+  
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -54,49 +55,51 @@
   <!-- Marketing messaging and featurettes
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
+ 
+ <!-- This Checks if the user is logged in -->
+  <div *ngIf="checkLogin()">
+    <section><div class="container">
 
-  <section><div class="container">
-
-    <div class="row">
-      <div class="col-md-4">
-        <h3 class="text-center mb-5">Simple Card</h3>
-        <div class="card card-01">
-          <img class="card-img-top" src="https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Card image cap">
-          <div class="card-body">
-            <span class="badge-box"><i class="fa fa-check"></i></span>
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-default text-uppercase">Explore</a>
+      <div class="row">
+        <div class="col-md-4">
+          <h3 class="text-center mb-5">Simple Card</h3>
+          <div class="card card-01">
+            <img class="card-img-top" src="https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Card image cap">
+            <div class="card-body">
+              <span class="badge-box"><i class="fa fa-check"></i></span>
+              <h4 class="card-title">Card title</h4>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-default text-uppercase">Explore</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <h3 class="text-center mb-5">Simple Card</h3>
-        <div class="card card-01">
-          <img class="card-img-top" src="https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Card image cap">
-          <div class="card-body">
-            <span class="badge-box"><i class="fa fa-check"></i></span>
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-default text-uppercase">Explore</a>
+        <div class="col-md-4">
+          <h3 class="text-center mb-5">Simple Card</h3>
+          <div class="card card-01">
+            <img class="card-img-top" src="https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?h=350&auto=compress&cs=tinysrgb" alt="Card image cap">
+            <div class="card-body">
+              <span class="badge-box"><i class="fa fa-check"></i></span>
+              <h4 class="card-title">Card title</h4>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-default text-uppercase">Explore</a>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <h3 class="text-center mb-5">Movie Card</h3>
-        <div class="card card-01 height-fix">
-          <img class="card-img-top" src="http://res.cloudinary.com/amritvirk23/image/upload/v1506061057/poc.jpg" alt="Card image cap">
-          <div class="card-img-overlay">
-            <h4 class="card-title"><strong>Pirates of the Caribbean V</strong></h4>
-            <p class="card-text">Captain Jack Sparrow searches for the trident of Poseidon.</p>
-            <p class="card-text"><a href="#" class="fa fa-bookmark-o"></a><a class="fa fa-heart-o" href="#"></a></p>
+        <div class="col-md-4">
+          <h3 class="text-center mb-5">Movie Card</h3>
+          <div class="card card-01 height-fix">
+            <img class="card-img-top" src="http://res.cloudinary.com/amritvirk23/image/upload/v1506061057/poc.jpg" alt="Card image cap">
+            <div class="card-img-overlay">
+              <h4 class="card-title"><strong>Pirates of the Caribbean V</strong></h4>
+              <p class="card-text">Captain Jack Sparrow searches for the trident of Poseidon.</p>
+              <p class="card-text"><a href="#" class="fa fa-bookmark-o"></a><a class="fa fa-heart-o" href="#"></a></p>
+            </div>
           </div>
         </div>
+
       </div>
-
-    </div>
-  </div></section>
-
+    </div></section>
+</div>
 
   <div class="container marketing">
 

@@ -6,11 +6,13 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 // Import the DOM for the Ratings
-import { Rating } from './DOM/rating'
+import { Rating } from './DOM/rating';
 import { MessageService } from './message.service';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                             'x-ibm-client-id' : 'bdd51b94-4183-4ce5-9e83-47c76b76c11a',
+                             'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO'})
 };
 
 @Injectable()
@@ -33,7 +35,7 @@ export class RatingsService {
   * Fetch all user ratings
   */
   getRatings(): Observable<Rating[]> {
-    return this.http.get<Rating[]>(this.ratingsUrl)
+    return this.http.get<Rating[]>(this.ratingsUrl, httpOptions)
     .pipe(
       tap(ratings => this.log(`fetched ratings`),
           catchError(this.handleError('getRatings', [])))
@@ -48,7 +50,7 @@ export class RatingsService {
   getRatingsByUser(userId: String): Observable<Rating[]> {
     const url = `${this.ratingsUrl}/filter[where][userId]=${userId}`;
 
-    return this.http.get<Rating[]>(this.ratingsUrl)
+    return this.http.get<Rating[]>(this.ratingsUrl, httpOptions)
     .pipe(
       tap(ratings => this.log(`fetched ratings`),
           catchError(this.handleError('getRatings', [])))
@@ -63,7 +65,7 @@ export class RatingsService {
   getRatingsByMovie(movieId: String): Observable<Rating[]> {
     const url = `${this.ratingsUrl}/filter[where][movieId]=${movieId}`;
 
-    return this.http.get<Rating[]>(this.ratingsUrl)
+    return this.http.get<Rating[]>(this.ratingsUrl, httpOptions)
     .pipe(
       tap(ratings => this.log(`fetched ratings`),
           catchError(this.handleError('getRatings', [])))

@@ -20,7 +20,7 @@ export class RatingsComponent implements OnInit {
     this.getRatings();
   }
 
-  getRatings(): void{
+  getRatings(): void {
     this.ratingsService.getRatings()
      .subscribe(ratings => this.ratings = ratings);
   }

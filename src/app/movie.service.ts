@@ -13,13 +13,12 @@ import {Watchlist} from "./DOM/watchlist";
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
                              'x-ibm-client-id' : 'bdd51b94-4183-4ce5-9e83-47c76b76c11a',
-                             'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO',})
+                             'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO'})
 };
 
 @Injectable()
 export class MovieService {
-  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0';
-  private singleMovieUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
+  private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
   private listUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/me/watchlists';
 
 
@@ -27,9 +26,14 @@ export class MovieService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  /** GET heroes from the server */
-  getMovies (): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.moviesUrl, httpOptions)
+  /** GET heroes from the server
+   *  @param pageNr - Represtents the page number as requested by the user and will
+   *    return a predefined number of results. Page numbers start at 1.
+  */
+  getMovies (pageNr: number = 1): Observable<Movie[]> {
+    // MUST FIX THE URL AS THE FILTER IS HARDCODED
+    const url = `${this.moviesUrl}?filter[limit]=${10}&filter[skip]=${(pageNr - 1) * 10}`;
+    return this.http.get<Movie[]>(url, httpOptions)
       .pipe(
         tap(movies => this.log(`fetched Movies`)),
         catchError(this.handleError('getMovies', []))
@@ -39,13 +43,26 @@ export class MovieService {
 
   createWatchlist(watchlist: Watchlist): Observable<Watchlist> {
     return this.http.post<Watchlist>(this.listUrl, watchlist, httpOptions).pipe(
-      tap((watchlist : Watchlist)=>console.log('Created customer with id ='+watchlist.name)),
+      tap((watchlist : Watchlist)=>console.log('Created customer with id ='+ watchlist.name)),
       catchError(this.handleError<Watchlist>('create list'))
     );
   }
 
-  deleteWatchlist(){
+  deleteWatchlist() {
 
+  }
+
+  /**
+   * Will get movie Recommendations based on the MovieID provided.
+   * @param movieID - represents the movie from which you want to find similarities.
+   * @param pageNr - represents the pageNumber out of the total in the movieSet.
+   */
+  getMovieRecommendations(movieID: string): Observable<Movie[]> {
+    const url = `${this.moviesUrl}/${movieID}/similar/`;
+
+    return this.http.get<Movie[]>(url, httpOptions).pipe(
+      tap((movieSet: Movie[]) => console.log('Fetchedd'))
+    );
   }
 
   /** GET hero by id. Return `undefined` when id not found */
@@ -86,7 +103,7 @@ export class MovieService {
   //
   // /** GET hero by id. Will 404 if id not found */
   getMovie(id: string): Observable<Movie> {
-    const url = `${this.singleMovieUrl}/${id}`;
+    const url = `${this.moviesUrl}/${id}`;
     return this.http.get<Movie>(url, httpOptions).pipe(
       tap(_ => this.log(`fetched movie id=${id}`)),
       catchError(this.handleError<Movie>(`getMovie id=${id}`))
@@ -100,7 +117,8 @@ export class MovieService {
       return of([]);
     }
 
-    return this.http.get<Movie[]>(`https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0&filter%5Bwhere%5D%5Btitle%5D%5Blike%5D=${term}`, httpOptions).pipe(
+    const url = `${this.moviesUrl}/?filter[limit]=${10}&filter[skip]=${0}&filter[where][title][like]=${term}`;
+    return this.http.get<Movie[]>(url, httpOptions).pipe(
       tap(_ => this.log(`found movies matching "${term}"`)),
       catchError(this.handleError<Movie[]>('searchMovies', []))
     );

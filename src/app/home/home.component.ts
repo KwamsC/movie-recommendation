@@ -13,4 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  checkLogin() {
+    return (localStorage.getItem('currentUser') && localStorage.getItem('accessToken'));
+   }
 }
