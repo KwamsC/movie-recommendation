@@ -20,7 +20,7 @@ const httpOptions = {
 export class MovieService {
   private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies?filter%5Blimit%5D=10&filter%5Bskip%5D=0';
   private singleMovieUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
-  private listUrl = '';
+  private listUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/me/watchlists';
 
 
   constructor(
@@ -42,6 +42,10 @@ export class MovieService {
       tap((watchlist : Watchlist)=>console.log('Created customer with id ='+watchlist.name)),
       catchError(this.handleError<Watchlist>('create list'))
     );
+  }
+
+  deleteWatchlist(){
+
   }
 
   /** GET hero by id. Return `undefined` when id not found */

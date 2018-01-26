@@ -5,6 +5,7 @@ import { MoviesComponent} from "../movies/movies.component";
 import {MovieService} from "../movie.service";
 
 
+
 @Component({
   selector: 'app-movielist',
   templateUrl: './movielist.component.html',
@@ -12,10 +13,12 @@ import {MovieService} from "../movie.service";
 })
 export class MovielistComponent implements OnInit {
   watchlist: Watchlist;
+  watchlists: Watchlist[];
 
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
+    this.watchlist = new Watchlist();
   }
 
   onSubmit(){

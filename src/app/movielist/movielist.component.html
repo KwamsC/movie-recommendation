@@ -1,15 +1,14 @@
 <div>
-  <h1>Make a new list</h1>
-  <form #registrationForm="ngForm" (ngSubmit)="onSubmit()">
+  <h1>Make a watchlist</h1>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
     <div>
-      <label for="name">name</label>
-      <input type="text" [(ngModel)]="watchlist.name" id="name" name="name" required>
+      <label for="email">name</label>
+      <input type="text" [(ngModel)]="watchlist.name" id="email" name="name" required>
     </div>
-    <!--<div>-->
-      <!--<label for="password">Password</label>-->
-      <!--<input type="password" [(ngModel)]="user.password" id="password" name = "password" required>-->
-    <!--</div>-->
-    <button type="submit">make list</button>
+    <div>
+      <label for="public">Public</label>
+      <input type="checkbox" [(ngModel)]="watchlist.public" id="public" name = "public" required>
+    </div>
+    <button type="submit">Make list</button>
   </form>
 </div>
-
