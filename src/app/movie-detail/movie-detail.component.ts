@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Movie} from "../DOM/movie";
 import { MovieService} from "../movie.service";
+import {Watchlist} from "../DOM/watchlist";
 
 @Component({
   selector: 'app-movie-detail',
@@ -11,7 +12,7 @@ import { MovieService} from "../movie.service";
   styleUrls: ['./movie-detail.component.css']
 })
 export class MovieDetailComponent implements OnInit {
-
+  watchlists: Watchlist[];
   @Input() movie: Movie;
 
   constructor(  private route: ActivatedRoute,
@@ -19,18 +20,29 @@ export class MovieDetailComponent implements OnInit {
                 private location: Location) { }
 
   ngOnInit(): void {
-    // this.getMovie();
+    this.getMovie();
+    this.getWatchlists();
   }
-  //
+
+  getWatchlists(): void {
+    this.movieService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
+  }
+
   // getMovie(): void {
-  //   this.route.params.subscribe( params =>
-  //   this.movieService.getMovie(params['id'])
-  //     .subscribe(movie => this.movie = movie));
+  //   const id = +this.route.snapshot.paramMap.get('id');
+  //   this.movieService.getMovie(id)
+  //     .subscribe(movie => this.movie = movie);
   // }
-  //
-  // goBack(): void {
-  //   this.location.back();
-  // }
+
+  getMovie(): void {
+    this.route.params.subscribe( params =>
+    this.movieService.getMovie(params['id'])
+      .subscribe(movie => this.movie = movie));
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
   //
   // save(): void {
   //   this.movieService.updateMovie(this.movie)

@@ -1,4 +1,3 @@
-import { ModalComponent } from './modal/modal.component';
 import { Authguard } from './_guards/authguard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -47,7 +46,6 @@ import { AlertService } from './alert.service';
     AlertComponent,
     MovieDetailComponent,
     MovielistComponent,
-    ModalComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ export class MovieService {
   private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
   private listUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/me/watchlists';
   private movielisturl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/watchlists'
+  private singleMovieUrl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies/findone?filter%5Bwhere%5D%5Bid%5D='
 
 
   constructor(
@@ -43,7 +44,7 @@ export class MovieService {
 
   /** GET hero by id. Return `undefined` when id not found */
   getMovieNo404<Data>(id: number): Observable<Movie> {
-    const url = `${this.moviesUrl}/?id=${id}`;
+    const url = `${this.sin}/?id=${id}`;
     return this.http.get<Movie[]>(url)
       .pipe(
         map(movies => movies[0]), // returns a {0|1} element array
@@ -128,13 +129,24 @@ export class MovieService {
   // }
   //
   // /** GET hero by id. Will 404 if id not found */
+  // getMovie(id: string): Observable<Movie> {
+  //   const url = `${this.singleMovieUrl}${id}`;
+  //   return this.http.get<Movie>(url, httpOptions).pipe(
+  //     tap(_ => this.log(`fetched movie id=${id}`)),
+  //     catchError(this.handleError<Movie>(`getMovie id=${id}`))
+  //   );
+  // }
+
   getMovie(id: string): Observable<Movie> {
-    const url = `${this.moviesUrl}/${id}`;
+    const url = `${this.singleMovieUrl}${id}`;
     return this.http.get<Movie>(url, httpOptions).pipe(
-      tap(_ => this.log(`fetched movie id=${id}`)),
-      catchError(this.handleError<Movie>(`getMovie id=${id}`))
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Movie>(`getHero id=${id}`))
     );
   }
+
+
+
 
   /* GET heroes whose name contains search term */
   searchMovies(term: string): Observable<Movie[]> {

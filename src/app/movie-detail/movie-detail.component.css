@@ -2,4 +2,7 @@
 .pre-cost{text-decoration: line-through; color: #a5a5a5;}
 .space-ten{padding: 10px 0;}
 
+button.btn.btn-primary{
+  margin-top: 10px;
+}
 
