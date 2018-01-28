@@ -19,7 +19,7 @@ const httpOptions = {
 export class RatingsService {
 
   // Define the address of the ratings on the resource server
-  private ratingsUrl = 'api/ratings';
+  private ratingsUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/ratings';
 
 
 
@@ -79,7 +79,7 @@ export class RatingsService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<Rating> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

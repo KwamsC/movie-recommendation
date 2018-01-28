@@ -28,6 +28,10 @@ export class MovieDetailComponent implements OnInit {
     this.movieService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
   }
 
+  onSubmit(): void{
+    this.route.params.subscribe( params =>this.movieService.AddmovieToWatchlist(movie, params['id']).subscribe(movie=> this.movie=movie));
+  }
+
   // getMovie(): void {
   //   const id = +this.route.snapshot.paramMap.get('id');
   //   this.movieService.getMovie(id)
@@ -43,6 +47,12 @@ export class MovieDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  rateFive(): void{
+
+  }
+
+
   //
   // save(): void {
   //   this.movieService.updateMovie(this.movie)

@@ -20,9 +20,8 @@ const httpOptions = {
 export class MovieService {
   private moviesUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies';
   private listUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/me/watchlists';
-  private movielisturl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/watchlists'
-  private singleMovieUrl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies/findone?filter%5Bwhere%5D%5Bid%5D='
-
+  private movielisturl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/watchlists';
+  private singleMovieUrl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies/findone?filter%5Bwhere%5D%5Bid%5D=';
 
   constructor(
     private http: HttpClient,
@@ -66,6 +65,14 @@ export class MovieService {
     );
   }
 
+  AddmovieToWatchlist (movie: Movie, id: string): Observable<Movie> {
+    const url = `${this.movielisturl}/${id}/movies`;
+    return this.http.post<Movie>(url, movie, httpOptions).pipe(
+      tap((movie: Movie) => this.log(`added movie w/ id=${movie.title}`)),
+      catchError(this.handleError<Movie>('addMovie'))
+    );
+  }
+
   deleteWatchlist() {
 
   }
@@ -100,15 +107,6 @@ export class MovieService {
       catchError(this.handleError<Watchlist>(`getMovie id=${id}`))
     );
   }
-
-  AddmovieToWatchlist (movie: Movie, id: string): Observable<Movie> {
-    const url = `${this.movielisturl}/${id}/movies`;
-    return this.http.post<Movie>(url, movie, httpOptions).pipe(
-      tap((movie: Movie) => this.log(`added movie w/ id=${movie.id}`)),
-      catchError(this.handleError<Movie>('addMovie'))
-    );
-  }
-
   // getMovie(): Observable<Movie>{
   // return this.http.get<Movie>(this.moviesUrl).pipe(
   //       tap(movie => this.log(`fetched movie id=`+movie.id)),

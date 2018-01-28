@@ -17,13 +17,14 @@
             <p>Genre: {{movie.genres}}</p>
             <p>Release: {{movie.release_date}}</p>
             <div class="rating">
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              <span class="badge-box"><i class="fa fa-star"></i></span>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <span class="badge-box" ><i class="fa fa-star" (click)="rateFive()" value="5"></i></span>
               (10 reviews)
             </div>
+            <div class="space-ten"></div>
             <div class="row">
               <div class="col-md-6">
                 <select class="form-control" name="select">

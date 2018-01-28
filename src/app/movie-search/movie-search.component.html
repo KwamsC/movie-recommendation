@@ -4,7 +4,7 @@
 
   <ul class="search-result">
     <li *ngFor="let movie of movies$ | async" >
-      <a routerLink="/detail/{{movie.id}}">
+      <a routerLink="/movies/{{movie.id}}">
         {{movie.title}}
       </a>
     </li>

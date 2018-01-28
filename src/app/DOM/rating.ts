@@ -3,4 +3,5 @@ export class Rating {
   comment: string;
   score: string;
   timestamp: number;
+  movieId: string;
 }
