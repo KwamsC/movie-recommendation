@@ -14,11 +14,8 @@ export class MoviesComponent implements OnInit {
   watchlist: Watchlist;
   movie: Movie;
   watchlists: Watchlist[];
-
-
+  modalMovieId: String;
   movies: Movie[];
-
-
 
   constructor(private movieService: MovieService,
     private route: ActivatedRoute) { }
@@ -60,7 +57,6 @@ export class MoviesComponent implements OnInit {
       if(m1.title < m2.title) return 1;
     })
   }
-
 
   setModalMovieId(movieId: String): void {
     this.modalMovieId = movieId;
