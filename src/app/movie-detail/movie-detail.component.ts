@@ -1,6 +1,6 @@
-import { User } from './../DOM/User';
-import { Rating } from './../DOM/rating';
-import { RatingsService } from './../ratings.service';
+
+
+
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -22,12 +22,17 @@ import {User} from "../DOM/User";
 export class MovieDetailComponent implements OnInit {
   selectedWatchlist: Watchlist;
   watchlists: Watchlist[];
+
   @Input() movie: Movie;
+
   ratings: Rating[];
-  inputRating: Rating;
+
   user: User;
   // watchlistMovie: Movie
 
+  inputRating: Rating;
+  ratingValue: string;
+  ratingComment: string;
 
   constructor(  private route: ActivatedRoute,
                 private movieService: MovieService,
@@ -54,14 +59,6 @@ export class MovieDetailComponent implements OnInit {
   }
 
 
-
-  // getMovie(): void {
-  //   const id = +this.route.snapshot.paramMap.get('id');
-  //   this.movieService.getMovie(id)
-  //     .subscribe(movie => this.movie = movie);
-  // }
-
-
   getMovie(): void {
     this.route.params.subscribe( params =>
     this.movieService.getMovie(params['id'])
@@ -84,13 +81,22 @@ export class MovieDetailComponent implements OnInit {
     this.movieService.AddmovieToWatchlist(this.movie, this.selectedWatchlist.id).subscribe();
   }
 
-  // rateFive(): void{
-  //   this.rating.score= "1";
-  //   this.rating.timestamp="2018-01-27T23:12:30.037Z";
-  //   this.rating.movieId=this.movie.id;
-  //   this.rating.userId=localStorage.getItem('currentUser');
-  //   this.ratingService.rateMovie(this.inputRating).subscribe();
-  // }
+  rateMovie(): void {
+    const time =  new Date().toISOString().substr(0, 24);
+
+    this.inputRating.comment = this.ratingComment;
+    this.inputRating.score = this.ratingValue;
+    this.inputRating.timestamp = time;
+    console.log(this.inputRating.timestamp.toString());
+    this.inputRating.movieId = this.movie.id;
+    this.inputRating.userId = localStorage.getItem('currentUser');
+
+    this.ratingsService.rateMovie(this.inputRating).subscribe(
+      respons => {console.log('rating Succssful' + respons);
+                  this.getRatingsForMovie(); }
+
+    );
+  }
 
 
 }
