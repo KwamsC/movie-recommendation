@@ -20,6 +20,7 @@ export class MovieDetailComponent implements OnInit {
   @Input() movie: Movie;
   ratings: Rating[];
 
+  inputRating: Rating;
 
 
   constructor(  private route: ActivatedRoute,
