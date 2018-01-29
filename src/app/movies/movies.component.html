@@ -14,7 +14,7 @@
             <h4 class="card-title"><strong>{{movie.title}}</strong></h4>
             <p class="card-text">{{movie.release_date}}</p>
             <p class="card-text"><a href="#" class="fa fa-bookmark-o"></a><a class="fa fa-heart-o" href="#"></a> <a class="fa fa-search" routerLink="/movies/{{movie.id}}">details</a></p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view"><i class="fa fa-search"></i> Quick View</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view" (click) = "setModalMovieId(movie.id)"><i class="fa fa-search"></i> Quick View</button>
           </div>
         </div>
       </div>

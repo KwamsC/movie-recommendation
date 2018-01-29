@@ -18,6 +18,8 @@ export class MoviesComponent implements OnInit {
 
   movies: Movie[];
 
+
+
   constructor(private movieService: MovieService,
     private route: ActivatedRoute) { }
 
@@ -59,4 +61,8 @@ export class MoviesComponent implements OnInit {
     })
   }
 
+
+  setModalMovieId(movieId: String): void {
+    this.modalMovieId = movieId;
+  }
 }

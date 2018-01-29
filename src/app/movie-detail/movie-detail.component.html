@@ -57,6 +57,32 @@
             </div>
           </div>
         </div>
+        <!-- This is a comments list Template -->
+        
+        
+        
+        <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                <div class="page-header">
+                  <h1><small class="pull-right" *ngIf="this.ratings">{{this.ratings.length}} Ratings</small> Ratings </h1>
+                </div> 
+                 <div class="comments-list" *ngIf="ratings.length > 0">
+                     <div class="media" *ngFor="let rating of ratings">
+                          <div class="media-body">
+                                                          
+                            <p><span><h4 class="media-heading user_name">Username goes Here</h4></span>
+                               <span ><small class="pull-right">{{rating.timestamp}}</small> Score: {{rating.score}}/5</span>
+                            </p>                            
+                             <p>  {{rating.comment}} </p>
+
+                          </div>
+                        </div>
+                    </div>
+              </div>
+            </div>
+        </div>
+
       </div>
     </div>
   </div>

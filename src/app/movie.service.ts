@@ -43,7 +43,7 @@ export class MovieService {
 
   /** GET hero by id. Return `undefined` when id not found */
   getMovieNo404<Data>(id: number): Observable<Movie> {
-    const url = `${this.sin}/?id=${id}`;
+    const url = `${this.moviesUrl}/?id=${id}`;
     return this.http.get<Movie[]>(url)
       .pipe(
         map(movies => movies[0]), // returns a {0|1} element array

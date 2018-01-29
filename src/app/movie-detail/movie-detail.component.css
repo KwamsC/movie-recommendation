@@ -9,3 +9,16 @@ button.btn.btn-primary{
 i.fa.fa-star:hover{
   color: #55acee;
 }
+
+.user_name{
+    font-size:14px;
+    font-weight: bold;
+  }
+  .comments-list .media{
+    border-bottom: 1px dotted #ccc;
+  }
+
+  .limit-height{
+    max-height: 50;
+    overflow-y: scroll;
+  }

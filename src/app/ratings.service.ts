@@ -1,3 +1,4 @@
+import { User } from './DOM/User';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -8,6 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 // Import the DOM for the Ratings
 import { Rating } from './DOM/rating';
 import { MessageService } from './message.service';
+import { HttpParams } from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -48,9 +50,9 @@ export class RatingsService {
    * @param userId - a well formated string representing the UserID
    */
   getRatingsByUser(userId: String): Observable<Rating[]> {
-    const url = `${this.ratingsUrl}/filter[where][userId]=${userId}`;
+    const url = `${this.ratingsUrl}?filter[where][userId]=${userId}`;
 
-    return this.http.get<Rating[]>(this.ratingsUrl, httpOptions)
+    return this.http.get<Rating[]>(url, httpOptions)
     .pipe(
       tap(ratings => this.log(`fetched ratings`),
           catchError(this.handleError('getRatings', [])))
@@ -62,13 +64,30 @@ export class RatingsService {
    * Fetch all ratings related to a Movie
    * @param movieId - a well formated string representing the movie ID
    */
-  getRatingsByMovie(movieId: String): Observable<Rating[]> {
-    const url = `${this.ratingsUrl}/filter[where][movieId]=${movieId}`;
+  getRatingsByMovie(movieId: string): Observable<Rating[]> {
+    const url = `${this.ratingsUrl}?filter[where][movieId]=${movieId}`;
 
-    return this.http.get<Rating[]>(this.ratingsUrl, httpOptions)
+
+    return this.http.get<Rating[]>(url, httpOptions)
     .pipe(
       tap(ratings => this.log(`fetched ratings`),
           catchError(this.handleError('getRatings', [])))
+    );
+  }
+
+  /**
+   * Fetch the user who wrote the given rating
+   * @param ratingId - a well formed ID representing the rating ID
+   */
+  getRatingAuthor(ratingId: String): Observable<User> {
+    //GET /ratings/{id}/user
+
+    const url = `${this.ratingsUrl}/${ratingId}/user`;
+
+    return this.http.get<User>(url, httpOptions)
+    .pipe(
+      tap(Authors => this.log(`fetched rating Author`),
+      catchError(this.handleError('getRatings', [])))
     );
   }
 
@@ -79,8 +98,8 @@ export class RatingsService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<Rating> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+  private handleError<Rating> (operation = 'operation', result?: any) {
+    return (error: any): Observable<any> => {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
@@ -89,7 +108,7 @@ export class RatingsService {
       this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      return of(result as T);
+      return of(result );
     };
   }
 
