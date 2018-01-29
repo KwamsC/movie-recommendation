@@ -16,7 +16,9 @@
             <p>{{movie.overview}}</p>
             <p>Genre: {{movie.genres}}</p>
             <p>Release: {{movie.release_date}}</p>
-            <p>Release: {{movie.id}}</p>
+            <p>Runtime: {{movie.runtime}} minutes</p>
+            <p>Language: {{movie.language}}</p>
+
             <div class="rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
@@ -27,17 +29,6 @@
             </div>
             <div class="space-ten"></div>
             <div class="row">
-
-
-              <!--<select class='select-option' required [(ngModel)]='optionSelected' (ngModelChange)='optionsSelected($event)'>-->
-                <!--<option class='option' *ngFor='let option of options' [value]="option">{{option}}</option>-->
-              <!--</select>-->
-              <!--<select [(ngModel)]="car.colour">-->
-                <!--<option *ngFor="let watchlist of watchlists" [ngValue]="x" >{{x.name}}</option>-->
-              <!--</select>-->
-
-
-
               <div class="col-md-6">
                 <select class="form-control" [(ngModel)]="selectedWatchlist" name="selectedWatchlist">
                   <option value="" selected="watchlist">Watchlist</option>
@@ -73,22 +64,22 @@
           <textarea class="form-control" [(ngModel)]="ratingComment" name="addComment" id="addComment" rows="5"></textarea>
         </div>
         <!-- This is a comments list Template -->
-        
-        
-        
+
+
+
         <div class="container">
           <div class="row">
               <div class="col-md-12">
                 <div class="page-header">
                   <h1><small class="pull-right" *ngIf="this.ratings">{{this.ratings.length}} Ratings</small> Ratings </h1>
-                </div> 
+                </div>
                  <div class="comments-list" *ngIf="ratings.length > 0">
                      <div class="media" *ngFor="let rating of ratings">
                           <div class="media-body">
-                                                          
+
                             <p><span><h4 class="media-heading user_name">UserID: {{rating.userId}}</h4></span>
                                <span ><small class="pull-right">{{rating.timestamp}}</small> Score: {{rating.score}}/5</span>
-                            </p>                            
+                            </p>
                              <p>  {{rating.comment}} </p>
 
                           </div>

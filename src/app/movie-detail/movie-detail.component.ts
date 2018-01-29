@@ -28,7 +28,6 @@ export class MovieDetailComponent implements OnInit {
   ratings: Rating[];
 
   user: User;
-  // watchlistMovie: Movie
 
   inputRating: Rating;
   ratingValue: string;
@@ -51,13 +50,6 @@ export class MovieDetailComponent implements OnInit {
   getWatchlists(): void {
     this.movieService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
   }
-
-  onSubmit(): void {
-    this.route.params.subscribe(
-        params => this.movieService.AddmovieToWatchlist(this.movie, params['id'])
-        .subscribe(movie => this.movie = movie));
-  }
-
 
   getMovie(): void {
     this.route.params.subscribe( params =>

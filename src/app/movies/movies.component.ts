@@ -14,7 +14,6 @@ export class MoviesComponent implements OnInit {
   watchlist: Watchlist;
   movie: Movie;
   watchlists: Watchlist[];
-  modalMovieId: String;
   movies: Movie[];
 
   constructor(private movieService: MovieService,
@@ -25,16 +24,9 @@ export class MoviesComponent implements OnInit {
     this.getWatchlists();
   }
 
-
   getMovies(): void {
     this.movieService.getMovies().subscribe(movies => this.movies = movies);
   }
-  //
-  // getMovie(): void {
-  //   const id = this.route.snapshot.paramMap.get('id');
-  //   this.movieService.getMovie(id)
-  //     .subscribe(movie => this.movie = movie);
-  // }
 
   getWatchlists(): void {
     this.movieService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
@@ -56,9 +48,5 @@ export class MoviesComponent implements OnInit {
       if(m1.title === m2.title) return 0;
       if(m1.title < m2.title) return 1;
     })
-  }
-
-  setModalMovieId(movieId: String): void {
-    this.modalMovieId = movieId;
   }
 }
