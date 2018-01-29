@@ -16,41 +16,51 @@
             <p>{{movie.overview}}</p>
             <p>Genre: {{movie.genres}}</p>
             <p>Release: {{movie.release_date}}</p>
+            <p>Release: {{movie.id}}</p>
             <div class="rating">
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
               <i class="fa fa-star"></i>
-              <span class="badge-box" ><i class="fa fa-star" (click)="rateFive()" value="5"></i></span>
+              <span class="badge-box" ><i class="fa fa-star" value="5"></i></span>
               (10 reviews)
             </div>
             <div class="space-ten"></div>
             <div class="row">
+
+
+              <!--<select class='select-option' required [(ngModel)]='optionSelected' (ngModelChange)='optionsSelected($event)'>-->
+                <!--<option class='option' *ngFor='let option of options' [value]="option">{{option}}</option>-->
+              <!--</select>-->
+              <!--<select [(ngModel)]="car.colour">-->
+                <!--<option *ngFor="let watchlist of watchlists" [ngValue]="x" >{{x.name}}</option>-->
+              <!--</select>-->
+
+
+
               <div class="col-md-6">
-                <select class="form-control" name="select">
-                  <option value="" selected="">Watchlist</option>
-                  <option *ngFor="let watchlist of watchlists" value="{{watchlist.id}}">
-                    {{watchlist.name}}
-                  </option>
+                <select class="form-control" [(ngModel)]="selectedWatchlist" name="selectedWatchlist">
+                  <option value="" selected="watchlist">Watchlist</option>
+                  <option *ngFor="let watchlist of watchlists" [ngValue]="watchlist">{{watchlist.name}}</option>
                 </select>
               </div>
               <!-- end col -->
               <div class="col-md-6">
-                <select class="form-control" name="select">
+                <select class="form-control" [(ngModel)]="selectedWatchlist"  name="selectedWatchlist">
                   <option value="" selected="">Rating</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
+                  <option [ngValue]="1">1</option>
+                  <option [ngValue]="2">2</option>
+                  <option [ngValue]="3">3</option>
+                  <option [ngValue]="4">4</option>
+                  <option [ngValue]="5">5</option>
                 </select>
               </div>
               <!-- end col -->
             </div>
             <div class="space-ten"></div>
             <div class="btn-ground">
-              <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> rate movie</button>
-              <button type="button" class="btn btn-primary"><span class="fa fa-heart"></span> Add To Wishlist</button>
+              <button type="button" class="btn btn-primary" (click)="rateFive()"><span class="glyphicon glyphicon-shopping-cart"></span> rate movie</button>
+              <button type="button" class="btn btn-primary" (click)="addTolist()"><span class="fa fa-heart"></span> Add To Wishlist</button>
             </div>
             <div class="btn-ground">
               <button type="button" class="btn btn-primary" (click)="goBack()">back</button>

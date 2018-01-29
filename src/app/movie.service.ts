@@ -9,6 +9,7 @@ import { Movie} from "./DOM/movie";
 import { MessageService } from './message.service';
 import {User} from "./DOM/User";
 import {Watchlist} from "./DOM/watchlist";
+import {Rating} from "./DOM/rating";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -22,6 +23,7 @@ export class MovieService {
   private listUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users/me/watchlists';
   private movielisturl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/watchlists';
   private singleMovieUrl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/movies/findone?filter%5Bwhere%5D%5Bid%5D=';
+  private ratingsUrl='https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/ratings';
 
   constructor(
     private http: HttpClient,
@@ -40,8 +42,15 @@ export class MovieService {
         catchError(this.handleError('getMovies', []))
       );
   }
+  rateMovie(rating:Rating): Observable<Rating> {
+    return this.http.post<Rating>(this.ratingsUrl, rating, httpOptions).pipe(
+      tap((rating : Rating)=>console.log('rated movie'+rating.score)),
+      catchError(this.handleError<Rating>('ratemovie'))
+    );
+  }
 
   /** GET hero by id. Return `undefined` when id not found */
+<<<<<<< HEAD
   getMovieNo404<Data>(id: number): Observable<Movie> {
     const url = `${this.moviesUrl}/?id=${id}`;
     return this.http.get<Movie[]>(url)
@@ -54,6 +63,20 @@ export class MovieService {
         catchError(this.handleError<Movie>(`getMovie id=${id}`))
       );
   }
+=======
+  // getMovieNo404<Data>(id: number): Observable<Movie> {
+  //   const url = `${this.sin}/?id=${id}`;
+  //   return this.http.get<Movie[]>(url)
+  //     .pipe(
+  //       map(movies => movies[0]), // returns a {0|1} element array
+  //       tap(h => {
+  //         const outcome = h ? `fetched` : `did not find`;
+  //         this.log(`${outcome} movie id=${id}`);
+  //       }),
+  //       catchError(this.handleError<Movie>(`getMovie id=${id}`))
+  //     );
+  // }
+>>>>>>> 391ab93cc118e1e50d91f8b1b3b11209696bb2bd
 
 
   /** Watchlists*/
