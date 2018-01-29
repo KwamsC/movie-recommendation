@@ -74,8 +74,8 @@ export class MovieService {
   }
 
   AddmovieToWatchlist (movie: Movie, id: string): Observable<Movie> {
-    const url = `${this.movielisturl}/${id}/movies`;
-    return this.http.post<Movie>(url, movie, httpOptions).pipe(
+    const url = `${this.movielisturl}/${id}/movies/rel/${movie.id}`;
+    return this.http.put<Movie>(url, null, httpOptions).pipe(
       tap((movie: Movie) => this.log(`added movie w/ id=${movie.title}`)),
       catchError(this.handleError<Movie>('addMovie'))
     );
