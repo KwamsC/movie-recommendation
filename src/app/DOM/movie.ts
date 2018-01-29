@@ -10,5 +10,4 @@ export class Movie {
   release_date: string;
   poster: string;
   id: string;
-  rev: string;
 }

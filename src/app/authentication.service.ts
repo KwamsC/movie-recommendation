@@ -49,7 +49,7 @@ export class AuthenticationService {
         if(loginOutput.id && loginOutput.userId){
           localStorage.setItem('currentUser', loginOutput.userId);
           localStorage.setItem('accessToken', loginOutput.id);
-          this.router.navigate(['movies']);
+          this.router.navigate(['']);
         }
         return loginOutput;
       }),
@@ -87,7 +87,7 @@ export class AuthenticationService {
       this.alertService.error('Logout Api not Set Up.');
     }
 
-    
+
     return(error: any): Observable<T> => {
       console.error(error);
       //return the empty result so the application keeps running

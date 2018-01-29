@@ -5,6 +5,7 @@ import { MessageService } from '../message.service';
 import { Rating } from '../DOM/rating';
 import { RatingsService } from '../ratings.service';
 
+
 @Component({
   selector: 'app-ratings',
   templateUrl: './ratings.component.html',
@@ -12,11 +13,13 @@ import { RatingsService } from '../ratings.service';
 })
 export class RatingsComponent implements OnInit {
   ratings: Rating[];
+  rating: Rating;
 
   constructor(private ratingsService: RatingsService,
               private messageService: MessageService) { }
 
   ngOnInit() {
+    this.rating = new Rating();
     this.getRatings();
   }
 
@@ -24,5 +27,7 @@ export class RatingsComponent implements OnInit {
     this.ratingsService.getRatings()
      .subscribe(ratings => this.ratings = ratings);
   }
+
+
 
 }

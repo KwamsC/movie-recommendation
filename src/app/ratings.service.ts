@@ -41,6 +41,20 @@ export class RatingsService {
           catchError(this.handleError('getRatings', [])))
     );
   }
+  //
+  // rateMovie(rating:Rating): Observable<Rating> {
+  //   return this.http.post<Rating>(this.ratingsUrl, rating, httpOptions).pipe(
+  //     tap((rating : Rating)=>console.log('rated movie'+rating.score)),
+  //     catchError(this.handleError<Rating>('registerUser'))
+  //   );
+  // }
+
+  rateMovie(rating:Rating):Observable<Rating>{
+    return this.http.post<Rating>(this.ratingsUrl, rating,httpOptions).pipe(
+      tap((rating:Rating)=>console.log('Created product with id ='+rating.id)),
+      catchError(this.handleError<Rating>('createProduct'))
+    );
+  }
 
 
   /**
@@ -64,7 +78,6 @@ export class RatingsService {
    */
   getRatingsByMovie(movieId: String): Observable<Rating[]> {
     const url = `${this.ratingsUrl}/filter[where][movieId]=${movieId}`;
-
     return this.http.get<Rating[]>(this.ratingsUrl, httpOptions)
     .pipe(
       tap(ratings => this.log(`fetched ratings`),
@@ -79,7 +92,7 @@ export class RatingsService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<Rating> (operation = 'operation', result?: T) {
+  private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
