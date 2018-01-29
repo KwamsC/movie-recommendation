@@ -50,7 +50,6 @@ export class MovieService {
   }
 
   /** GET hero by id. Return `undefined` when id not found */
-<<<<<<< HEAD
   getMovieNo404<Data>(id: number): Observable<Movie> {
     const url = `${this.moviesUrl}/?id=${id}`;
     return this.http.get<Movie[]>(url)
@@ -63,20 +62,6 @@ export class MovieService {
         catchError(this.handleError<Movie>(`getMovie id=${id}`))
       );
   }
-=======
-  // getMovieNo404<Data>(id: number): Observable<Movie> {
-  //   const url = `${this.sin}/?id=${id}`;
-  //   return this.http.get<Movie[]>(url)
-  //     .pipe(
-  //       map(movies => movies[0]), // returns a {0|1} element array
-  //       tap(h => {
-  //         const outcome = h ? `fetched` : `did not find`;
-  //         this.log(`${outcome} movie id=${id}`);
-  //       }),
-  //       catchError(this.handleError<Movie>(`getMovie id=${id}`))
-  //     );
-  // }
->>>>>>> 391ab93cc118e1e50d91f8b1b3b11209696bb2bd
 
 
   /** Watchlists*/
