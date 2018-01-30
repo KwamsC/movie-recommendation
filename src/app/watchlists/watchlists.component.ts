@@ -42,8 +42,20 @@ export class WatchlistsComponent implements OnInit {
     this.watchlistService.getWatchlists().subscribe(w => {
       this.watchlists = w;
       if (w && w[0]) {
-        this.onChange(w[0].id);
+        this.loadWatchlist(w[0].id);
       }
+    });
+  }
+
+  removeMovie(movieId: String): void {
+    const watchlistId = this.watchlistId;
+
+    if (!watchlistId || !movieId) {
+      return;
+    }
+
+    this.watchlistService.removeMovieFromWatchlist(watchlistId, movieId).subscribe(x => {
+      this.loadWatchlist(watchlistId);
     });
   }
 
@@ -70,8 +82,9 @@ export class WatchlistsComponent implements OnInit {
     });
   }
 
-  onChange(id): void {
+  loadWatchlist(id): void {
     this.watchlistId = id;
+    this.movies = [];
     this.watchlistService.getWatchlistMovies(id).subscribe(m => this.movies = m);
   }
 }

@@ -29,7 +29,6 @@ export class WatchlistService {
 
   createWatchlist(watchlist: Watchlist): Observable<Watchlist> {
     return this.http.post<Watchlist>(this.myWatchlistsUrl, watchlist, httpOptions).pipe(
-      tap((watchlist : Watchlist)=>console.log('Created customer with id ='+ watchlist.name)),
       catchError(this.handleError<Watchlist>('createWatchlist', null))
     );
   }
@@ -47,10 +46,17 @@ export class WatchlistService {
     )
   }
 
+  removeMovieFromWatchlist(watchlistId: String, movieId: String): Observable<{}> {
+    const url = this.watchlistsUrl + `/${watchlistId}/movies/rel/${movieId}`;
+    return this.http.delete(url, httpOptions).pipe(
+      catchError(this.handleError<{}>('removeMovieFromWatchlist', {}))
+    );
+  }
+
   shareWatchlist(watchlistId: String, userId: String) {
-    const url = this.usersUrl + `/${userId}/watchlists/${watchlistId}`;
-    return this.http.put<User>(url, httpOptions).pipe(
-      tap((user : User)=>console.log('Watchlist shared with user '+ userId)),
+    const url = this.watchlistsUrl + `/${watchlistId}/share`;
+    const user = { userId: userId };
+    return this.http.post<Watchlist>(url, user, httpOptions).pipe(
       catchError(this.handleError<Watchlist>('shareWatchlist', null))
     )
   }

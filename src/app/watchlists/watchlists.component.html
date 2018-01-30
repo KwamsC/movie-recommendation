@@ -5,12 +5,8 @@
     <h2>Create</h2>
     <form #loginForm="ngForm" (ngSubmit)="createWatchlist()">
       <div class="form-group">
-        <label for="email">Name</label>
+        <label for="email">Name:</label>
         <input type="text" [(ngModel)]="watchlistWC.name" id="email" name="name" class="form-control" required />
-      </div>
-      <div class="form-group">
-        <label for="public">Public</label>
-        <input type="checkbox" [(ngModel)]="watchlistWC.public" id="public" name="public" class="form-control" required />
       </div>
       <button class="btn btn-primary" type="submit">Create</button>
     </form>
@@ -19,7 +15,7 @@
   <div class="container">
     <h2>View</h2>
     <div class="form-group">
-      <select class="form-control" [(ngModel)]="selectedWatchlist" (change)="onChange($event.target.value)">
+      <select class="form-control" [(ngModel)]="selectedWatchlist" (change)="loadWatchlist($event.target.value)">
           <option *ngFor="let watchlist of watchlists" [value]="watchlist.id">{{watchlist.name}}</option>
       </select>
     </div>
@@ -36,7 +32,9 @@
           <div class="card-img-overlay">
             <h4 class="card-title"><strong>{{movie.title}}</strong></h4>
             <p class="card-text">{{movie.release_date}}</p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view" routerLink="/movies/{{movie.id}}"><i class="fa fa-search"></i> Details</button>
+            <button type="button" class="btn btn-primary" routerLink="/movies/{{movie.id}}"><i class="fa fa-search"></i> Details</button>
+            <br /><br />
+            <button type="button" class="btn btn-warning" (click)="removeMovie(movie.id)" ><i class="fa fa-minus-circle"></i> Remove</button>
           </div>
         </div>
       </div>
@@ -47,7 +45,7 @@
     <h2>Share</h2>
     <form #shareForm="ngForm" (ngSubmit)="shareWatchlist()">
       <div class="form-group">
-        <label for="userId">User</label>
+        <label for="userId">User:</label>
         <input type="text" [(ngModel)]="userId" id="user" name="user" class="form-control" required />
       </div>
       <button class="btn btn-primary" type="submit">Share</button>

@@ -14,7 +14,6 @@ import { RatingsComponent } from './ratings/ratings.component';
 import { RegisterComponent } from './register/register.component';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
-import { MovielistComponent } from "./movielist/movielist.component";
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { MoviesComponent } from './movies/movies.component';
@@ -47,7 +46,6 @@ import { AlertService } from './alert.service';
     LogoutComponent,
     AlertComponent,
     MovieDetailComponent,
-    MovielistComponent,
     WatchlistsComponent,
   ],
   imports: [
