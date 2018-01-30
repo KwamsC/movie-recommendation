@@ -27,8 +27,6 @@ export class MoviesComponent implements OnInit {
   movies: Movie[];
    movieCount: Count;
 
-
-
   constructor(private movieService: MovieService,
     private pagerService: PagerService,
     private route: ActivatedRoute) { }
@@ -83,9 +81,4 @@ export class MoviesComponent implements OnInit {
       if(m1.title < m2.title) return 1;
     })
   }
-
-
-  // setModalMovieId(movieId: String): void {
-  //   this.modalMovieId = movieId;
-  // }
 }

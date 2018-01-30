@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
+
 .user_name{
   font-size:14px;
   font-weight: bold;
@@ -7,6 +9,7 @@
   max-height: 20;
   overflow-y: scroll;
 }
+
 
 section{float:left;width:100%;padding:30px 0; position:relative; overflow:hidden; background:#6F8D8A;}
 section:before{content:"";position:absolute; width:110%; height:100%;  background-color: #ffffff; background-size:cover; filter: blur(10px); z-index:0; transform: scale(2);-ms-transform: scale(2); -webkit-transform: scale(2);}
@@ -45,7 +48,6 @@ body {
 }
 
 .description {
-  font-family: 'Fredericka the Great', cursive;
   text-align: center;
 }
 
@@ -112,13 +114,33 @@ i {
   margin-top: -60px;
 }
 
-.btn{
-  color: #fff;
-  background-color: #0062cc;
-  border-color: transparent;
-}
-
-.product_view .modal-dialog{max-width: 700px; width: 100%;}
+.product_view{max-width: 700px; width: 100%;}
 .pre-cost{text-decoration: line-through; color: #a5a5a5;}
 .space-ten{padding: 10px 0;}
 
+.listdemoListControls md-divider {
+  margin-top: 50;
+  margin-bottom: 0; }
+
+
+.listdemoListControls md-list {
+  padding-top: 0; }
+
+.listdemoListControls md-list-item > p,
+.listdemoListControls md-list-item > .md-list-item-inner > p,
+.listdemoListControls md-list-item .md-list-item-inner > p,
+.listdemoListControls md-list-item .md-list-item-inner > .md-list-item-inner > p {
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Likely future */ }
+
+
+/*
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+*/

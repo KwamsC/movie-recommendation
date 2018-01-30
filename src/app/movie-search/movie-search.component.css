@@ -1,4 +1,18 @@
 /* HeroSearch private styles */
+
+input[type=text] {
+  margin-top: 8px;
+  height: 25px;
+  width: 130px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+  width: 500px;
+}
+
 .search-result li {
   border-bottom: 1px solid gray;
   border-left: 1px solid gray;
@@ -26,11 +40,12 @@
 .search-result li a:active {
   color: white;
 }
-#search-box {
-  margin-top: 8px;
-  width: 500px;
-  height: 25px;
-}
+
+/*#search-box {*/
+  /*margin-top: 8px;*/
+  /*width: 500px;*/
+  /*height: 25px;*/
+/*}*/
 
 
 ul.search-result {

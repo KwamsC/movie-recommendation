@@ -12,9 +12,7 @@
           <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" alt="Card image cap">
           <div class="card-img-overlay">
             <h4 class="card-title"><strong>{{movie.title}}</strong></h4>
-            <p class="card-text">{{movie.release_date}}</p>
-            <p class="card-text"><a href="#" class="fa fa-bookmark-o"></a><a class="fa fa-heart-o" href="#"></a> <a class="fa fa-search" routerLink="/movies/{{movie.id}}">details</a></p>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view" (click) = "setModalMovieId(movie.id)"><i class="fa fa-search"></i> Quick View</button>
+            <button type="button" routerLink="/movies/{{movie.id}}" class="btn btn-primary" ><i class="fa fa-search"></i>View</button>
           </div>
         </div>
       </div>
@@ -44,62 +42,3 @@
           </ul>
   </div>
 </div> 
-<!-- Modal -->
-<div class="modal fade product_view" id="product_view">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <a href="#" data-dismiss="modal" class="class pull-right"><span class="fa fa-remove"></span></a>
-        <h3 class="modal-title">ng</h3>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6 card card-01 height-fix">
-            <img src="http://img.bbystatic.com/BestBuy_US/images/products/5613/5613060_sd.jpg" class="img-responsive">
-          </div>
-          <div class="col-md-6 product_content">
-            <h4>Product Id: <span>51526</span></h4>
-            <div class="rating">
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              <span class="badge-box"><i class="fa fa-star"></i></span>
-              (10 reviews)
-            </div>
-            <p>test</p>
-            <div class="row">
-              <div class="col-md-6">
-                <select class="form-control" name="select">
-                  <option value="" selected="">Watchlist</option>
-                  <option *ngFor="let watchlist of watchlists" value="{{watchlist.id}}">
-                    {{watchlist.name}}
-                  </option>
-                </select>
-              </div>
-              <!-- end col -->
-              <div class="col-md-6">
-                <select class="form-control" name="select">
-                  <option value="" selected="">Rating</option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                </select>
-              </div>
-              <!-- end col -->
-            </div>
-            <div class="space-ten"></div>
-            <div class="btn-ground">
-              <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span> rate movie</button>
-              <button type="button" class="btn btn-primary"><span class="fa fa-heart"></span> Add To Wishlist</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
