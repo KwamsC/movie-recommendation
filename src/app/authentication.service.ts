@@ -20,7 +20,6 @@ interface LoginOutput{
   userId: string;
 }
 
-
 // "email": "gogetassj39@hotmail.com",
 //   "accessToken": "jarmVjmEzf1vj8o8U9uKHVeH3WPVy1cdqK73w1P1wyFZGxOXE6IpbRdV9aUCu2SW"
 
@@ -33,7 +32,6 @@ export class AuthenticationService {
               private alertService: AlertService,
               private router: Router) { }
 
-
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(this.customerUrl, user, httpOptions).pipe(
       tap((user : User)=>console.log('Created customer with id ='+user.id)),
@@ -42,7 +40,7 @@ export class AuthenticationService {
 
   }
 
-  login(user:User):Observable<any>{
+  login(user: User):Observable<any>{
     return this.http.post<LoginOutput>(this.customerUrl+"login", user, httpOptions).pipe(
       map(loginOutput=>{
         //login succesful
@@ -55,10 +53,12 @@ export class AuthenticationService {
       }),
       catchError(this.handleError<User>('login Customer'))
     );
-
   }
 
-
+  isAdmin(): Boolean {
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser === "65b5db487e0ec974865f7b139e688b98";
+  }
 
   logout(): Observable<any> {
     let accessToken = localStorage.getItem('accessToken');

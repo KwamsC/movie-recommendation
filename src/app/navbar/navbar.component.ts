@@ -1,4 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +9,12 @@ import { Component, OnInit, Injectable } from '@angular/core';
 
 @Injectable()
 export class NavbarComponent implements OnInit {
+  variant: String;
 
-  constructor() { }
+
+  constructor(authorizationService: AuthenticationService) {
+    this.variant = authorizationService.isAdmin() ? 'dark' : 'light';
+  }
 
   ngOnInit() {
 
