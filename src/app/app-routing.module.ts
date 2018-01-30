@@ -1,3 +1,4 @@
+
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ import { Authguard } from './_guards/authguard';
 import {MovieSearchComponent} from "./movie-search/movie-search.component";
 import {MovielistComponent} from "./movielist/movielist.component";
 
+
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [Authguard] },
   { path: '', component: HomeComponent },
@@ -20,7 +22,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'movies/:id', component: MovieDetailComponent, canActivate: [Authguard]},
   { path: 'search', component: MovieSearchComponent, canActivate: [Authguard]},
-  {path: 'list', component: MovielistComponent, canActivate: [Authguard]},
+  { path: 'list', component: MovielistComponent, canActivate: [Authguard]}
+
 
 ];
 

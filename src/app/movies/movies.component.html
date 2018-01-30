@@ -21,6 +21,30 @@
     </div>
 </div>
 
+<div class="paginationContainer">
+  <div class="text-center">
+
+    <!-- pager -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">          
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(1); ">First</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+              </li>
+              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                  <a (click)="setPage(page)">{{page}}</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
+              </li>
+              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.totalPages)">Last</a>
+              </li>
+          </ul>
+  </div>
+</div> 
+<!-- Modal -->
 <div class="modal fade product_view" id="product_view">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -78,33 +102,4 @@
   </div>
 </div>
 
-<!--<div class="container">-->
-  <!--<div class="row flex-column-reverse flex-md-row">-->
-    <!--<div class="col-md-3">-->
-      <!--<div class="card">-->
-        <!--<div class="card-header">-->
-          <!--<img class="card-img" src="https://image.tmdb.org/t/p/w500/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="Card image">-->
-        <!--</div>-->
-        <!--<div class="card-body">-->
-          <!--<h1 class="card-title">Interstellar</h1>-->
-          <!--<div class="container">-->
-            <!--<div class="row">-->
-              <!--<div class="col-4 metadata">-->
-                <!--<i class="fa fa-star" aria-hidden="true"></i>-->
-                <!--<p>9.5/10</p>-->
-              <!--</div>-->
-              <!--<div class="col-8 metadata">Adventure. Sci-Fi</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<p class="card-text">A team of explorers travel through wormhole in space in an attempt to ensure humanity's survival.</p>-->
-          <!--<a class="trailer-preview" href="https://youtu.be/ePbKGoIGAXY" target="new">-->
-            <!--<i class="fa fa-play" aria-hidden="true"></i>-->
-          <!--</a>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-7 description">-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
 

@@ -10,6 +10,7 @@ import { MessageService } from './message.service';
 import {User} from "./DOM/User";
 import {Watchlist} from "./DOM/watchlist";
 import {Rating} from "./DOM/rating";
+import { Count } from './DOM/count';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -42,9 +43,20 @@ export class MovieService {
         catchError(this.handleError('getMovies', []))
       );
   }
-  rateMovie(rating:Rating): Observable<Rating> {
+
+  getMovieCount (): Observable<Count> {
+    const url = `${this.moviesUrl}/count`;
+    return this.http.get<Count>(url, httpOptions)
+    .pipe(
+      tap( myMovieCount => {this.log(`there are movies in the database.`);
+      catchError(this.handleError('getMovies', [])); }
+    )) ;
+
+  }
+
+  rateMovie(rating: Rating): Observable<Rating> {
     return this.http.post<Rating>(this.ratingsUrl, rating, httpOptions).pipe(
-      tap((rating : Rating)=>console.log('rated movie'+rating.score)),
+      tap((rating: Rating) => console.log('rated movie' + rating.score)),
       catchError(this.handleError<Rating>('ratemovie'))
     );
   }

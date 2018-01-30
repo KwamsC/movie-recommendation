@@ -1,3 +1,4 @@
+import { PagerService } from './pager.service';
 import { Authguard } from './_guards/authguard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -31,6 +32,7 @@ import {UnauthorizedInterceptorService} from "./unautorized-interceptor.service"
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,8 @@ import { AlertService } from './alert.service';
     LogoutComponent,
     AlertComponent,
     MovieDetailComponent,
-    MovielistComponent,
+    MovielistComponent
+
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { AlertService } from './alert.service';
     AuthenticationService,
     AlertService,
     Authguard,
+    PagerService,
     { provide: HTTP_INTERCEPTORS,
       useClass: AutorizationInterceptorService,
       multi: true
