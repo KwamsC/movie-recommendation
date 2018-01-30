@@ -1,6 +1,3 @@
-
-
-
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -22,6 +19,8 @@ import {User} from "../DOM/User";
 export class MovieDetailComponent implements OnInit {
   selectedWatchlist: Watchlist;
   watchlists: Watchlist[];
+  average: number;
+  length:number;
 
   @Input() movie: Movie;
 
@@ -53,13 +52,26 @@ export class MovieDetailComponent implements OnInit {
 
   getMovie(): void {
     this.route.params.subscribe( params =>
-    this.movieService.getMovie(params['id'])
-      .subscribe(movie => this.movie = movie));
+      this.movieService.getMovie(params['id'])
+        .subscribe(movie => this.movie = movie));
   }
 
 
   goBack(): void {
     this.location.back();
+  }
+
+  getAverage() {
+    let total = 0;
+    length=this.ratings.length;
+    for (var i = 0; i < length; i++) {
+      if (this.ratings[i].score) {
+        total += Number(this.ratings[i].score);
+        this.average = total;
+      }
+    }
+    this.average=this.average / length;
+    return this.average;
   }
 
   getRatingsForMovie(): void {
@@ -85,10 +97,9 @@ export class MovieDetailComponent implements OnInit {
 
     this.ratingsService.rateMovie(this.inputRating).subscribe(
       respons => {console.log('rating Succssful' + respons);
-                  this.getRatingsForMovie(); }
-
+        this.getRatingsForMovie(); }
     );
   }
-
-
 }
+
+
