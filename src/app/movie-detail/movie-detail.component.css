@@ -15,6 +15,32 @@ i.fa.fa-star:hover{
   width: 45%;
 }
 
+div.movie_img{
+  margin-bottom: 20px;
+}
+
+.movie__rating{
+  width: 47px;
+  height: 47px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 30px;
+  background-color: #ffd564;
+  border: solid 3px #000000;
+  border-radius: 24px;
+  background-color: #ffd564;
+  border: solid 3px rgba(0, 0, 0, 0.98);
+  font: 16px 'Roboto', sans-serif;
+  color: #4c4145;
+  text-align: center;
+  font-weight: bold;
+  top: 6px;
+  left: 6px;
+  -webkit-box-sizing: border-box;
+}
+
 img{
   width: 70%;
 }
@@ -37,41 +63,31 @@ a{
   text-decoration : none;
 }
 
-.starRating:not(old){
-  display        : inline-block;
-  width          : 7.5em;
-  height         : 1.5em;
-  overflow       : hidden;
-  vertical-align : bottom;
+div.row{
+  margin-top: 30px;
 }
 
-.starRating:not(old) > input{
-  margin-right : -100%;
-  opacity      : 0;
+p.runtime{
+  color: darkred;
 }
 
-.starRating:not(old) > label{
-  display         : block;
-  float           : right;
-  position        : relative;
-  background      : url('star-off.svg');
-  background-size : contain;
+p.overview{
+  margin-top: 30px;
 }
 
-.starRating:not(old) > label:before{
-  content         : '';
-  display         : block;
-  width           : 1.5em;
-  height          : 1.5em;
-  background      : url('star-on.svg');
-  background-size : contain;
-  opacity         : 0;
-  transition      : opacity 0.2s linear;
+
+.details{
+  float: right;
+  width: 55%;
 }
 
-.starRating:not(old) > label:hover:before,
-.starRating:not(old) > label:hover ~ label:before,
-.starRating:not(:hover) > :checked ~ label:before{
-  opacity : 1;
+
+
+.comment{
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
+select.form-control.ng-untouched.ng-pristine.ng-valid{
+  margin-top: 10px;
+}

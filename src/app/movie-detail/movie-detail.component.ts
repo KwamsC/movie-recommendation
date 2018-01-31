@@ -63,14 +63,15 @@ export class MovieDetailComponent implements OnInit {
 
   getAverage() {
     let total = 0;
-    length=this.ratings.length;
-    for (var i = 0; i < length; i++) {
+    let count =0
+
+    for (var i in this.ratings) {
       if (this.ratings[i].score) {
         total += Number(this.ratings[i].score);
-        this.average = total;
       }
+      count+=1;
     }
-    this.average=this.average / length;
+    this.average=total/count;
     return this.average;
   }
 
