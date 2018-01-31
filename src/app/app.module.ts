@@ -1,4 +1,4 @@
-import { MovielistComponent } from './movielist/movielist.component';
+
 import { PagerService } from './pager.service';
 import { Authguard } from './_guards/authguard';
 import { BrowserModule } from '@angular/platform-browser';
@@ -49,7 +49,6 @@ import { AlertService } from './alert.service';
     LogoutComponent,
     AlertComponent,
     MovieDetailComponent,
-    MovielistComponent,
     WatchlistsComponent
   ],
   imports: [

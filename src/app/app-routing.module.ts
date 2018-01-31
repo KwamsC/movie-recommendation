@@ -21,8 +21,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'movies/:id', component: MovieDetailComponent, canActivate: [Authguard]},
   { path: 'search', component: MovieSearchComponent, canActivate: [Authguard]},
-  { path: 'list', component: MovielistComponent, canActivate: [Authguard]},
-
 
   { path: 'watchlists', component: WatchlistsComponent, canActivate: [Authguard]},
 ];

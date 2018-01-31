@@ -4,9 +4,8 @@ import { PagerService } from './../pager.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Movie } from '../DOM/movie';
-import { MovieService } from '../movie.service';
 import { ActivatedRoute } from '@angular/router';
-import { Watchlist} from "../DOM/watchlist";
+import { Watchlist} from '../DOM/watchlist';
 
 
 @Component({
