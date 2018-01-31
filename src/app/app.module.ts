@@ -1,10 +1,11 @@
-
 import { PagerService } from './pager.service';
 import { Authguard } from './_guards/authguard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FormBuilder} from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Components
 import { AppComponent } from './app.component';
@@ -20,19 +21,19 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { MoviesComponent } from './movies/movies.component';
 import { WatchlistsComponent } from './watchlists/watchlists.component';
+import { AlertComponent } from './alert/alert.component';
 
 // Services
 import { WatchlistService } from './watchlist.service';
 import { MessageService } from './message.service';
 import { RatingsService } from './ratings.service';
-import { MovieService} from "./movie.service";
-import { FormBuilder} from "@angular/forms";
-import { AuthenticationService } from "./authentication.service";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { AutorizationInterceptorService } from "./autorization-interceptor.service";
-import { UnauthorizedInterceptorService } from "./unautorized-interceptor.service";
-import { AlertComponent } from './alert/alert.component';
+import { MovieService} from './movie.service';
+import { AuthenticationService } from './authentication.service';
+import { AutorizationInterceptorService } from './autorization-interceptor.service';
+import { UnauthorizedInterceptorService } from './unautorized-interceptor.service';
 import { AlertService } from './alert.service';
+import { RecommendationService} from './recommendation.service';
+import { RecommendationComponent } from './recommendation/recommendation.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { AlertService } from './alert.service';
     LogoutComponent,
     AlertComponent,
     MovieDetailComponent,
-    WatchlistsComponent
+    WatchlistsComponent,
+    RecommendationComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,9 @@ import { AlertService } from './alert.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ RatingsService,
+  providers: [
+    RecommendationService,
+    RatingsService,
     MessageService,
     MovieService,
     WatchlistService,

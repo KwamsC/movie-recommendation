@@ -1,9 +1,9 @@
 import { Count } from './../DOM/count';
-import { MovieService } from './../movie.service';
-import { PagerService } from './../pager.service';
+import { PagerService} from '../pager.service';
 import { Component, OnInit } from '@angular/core';
 
 import { Movie } from '../DOM/movie';
+import { MovieService} from '../movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { Watchlist} from '../DOM/watchlist';
 
@@ -17,6 +17,7 @@ export class MoviesComponent implements OnInit {
   watchlist: Watchlist;
   movie: Movie;
   watchlists: Watchlist[];
+  pagerService: PagerService;
 
   // pager object
   pager: any = {};
@@ -27,15 +28,12 @@ export class MoviesComponent implements OnInit {
    movieCount: Count;
 
   constructor(private movieService: MovieService,
-    private pagerService: PagerService,
-    private route: ActivatedRoute) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getMovieCount();
     this.getMovies();
     this.getWatchlists();
-
-
   }
 
   getMovieCount(): void {
@@ -67,17 +65,17 @@ export class MoviesComponent implements OnInit {
 
   sortAsc() {
     this.movies.sort((m1, m2) => {
-      if(m1.title > m2.title) return 1;
-      if(m1.title === m2.title) return 0;
-      if(m1.title < m2.title) return -1;
+      if (m1.title > m2.title) {return 1; }
+      if (m1.title === m2.title) {return 0; }
+      if (m1.title < m2.title) {return -1; }
     }) ;
   }
 
   sortDesc() {
     this.movies.sort((m1, m2) => {
-      if(m1.title > m2.title) return -1;
-      if(m1.title === m2.title) return 0;
-      if(m1.title < m2.title) return 1;
-    })
+      if (m1.title > m2.title) {return -1; }
+      if (m1.title === m2.title) {return 0; }
+      if (m1.title < m2.title) {return 1; }
+    }) ;
   }
 }

@@ -103,7 +103,7 @@ export class MovieService {
    * @param pageNr - represents the pageNumber out of the total in the movieSet.
    */
   getMovieRecommendations(movieID: string): Observable<Movie[]> {
-    const url = `${this.moviesUrl}/${movieID}/similar/`;
+    const url = `${this.moviesUrl}/${movieID}/similar`;
 
     return this.http.get<Movie[]>(url, httpOptions).pipe(
       tap((movieSet: Movie[]) => console.log('Fetchedd'))
