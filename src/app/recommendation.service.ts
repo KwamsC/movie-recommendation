@@ -14,7 +14,9 @@ const httpOptions = {
     'x-ibm-client-secret' : 'aX7fL6oK6iX5iO1wH0aC3iV4xN2wK4kA3mE7oY7vM3jJ8jK5lO'})
 };
 
-
+interface SimilarOutput{
+  movies: Movie[];
+}
 
 @Injectable()
 export class RecommendationService {
@@ -28,7 +30,8 @@ export class RecommendationService {
 
   getRecommendedMovies(id: string): Observable<Movie[]>{
     const url = `${this.recommendationsUrl}${id}/similar`;
-    return this.http.get<Movie[]>(url, httpOptions).pipe(
+    return this.http.get<SimilarOutput>(url, httpOptions).pipe(
+      map(r => r.movies),
       tap(_ => this.log(`found movies matching "${id}"`)),
       catchError(this.handleError<Movie[]>('searchMovies', []))
     );
