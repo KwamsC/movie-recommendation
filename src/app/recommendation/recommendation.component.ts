@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +12,7 @@ import {RecommendationService} from "../recommendation.service";
 @Component({
   selector: 'app-recommendation',
   templateUrl: './recommendation.component.html',
-  styleUrls: ['./recommendation.component.css']
+  styleUrls: ['./recommendation.component.css'],
 })
 export class RecommendationComponent implements OnInit {
   recommendedMovies: Movie[];
@@ -27,4 +27,9 @@ export class RecommendationComponent implements OnInit {
       .subscribe(recommendations => this.recommendedMovies = recommendations);
   }
 
+  ngOnChanges(...args: any[]) {
+    this.recommendationService
+      .getRecommendedMovies(this.movieId)
+      .subscribe(recommendations => this.recommendedMovies = recommendations);
+  }
 }
