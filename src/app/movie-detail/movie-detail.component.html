@@ -16,7 +16,7 @@
           <p class="overview">{{movie.overview}}</p>
           <p>Genre: {{movie.genres}}</p>
           <p class="runtime"> <span class="fa fa-clock-o"></span> {{movie.runtime}} minutes</p>
-          <p>Language: {{movie.language}}</p>
+          <p>Language: {{movie.language}}  {{recommendedMovies}}</p>
 
           <div class="rating">
             <i class="fa fa-star"></i>
@@ -54,12 +54,38 @@
         </div>
 
         </div>
-
-
-
-
-
       </div>
+
+
+    <!--<div *ngIf="recommendedMovies">-->
+    <div class="contain">
+
+      <h1>Recommended</h1>
+
+      <div class="row">
+        <div class="row__inner">
+
+          <div *ngFor="let movie of recommendedMovies">
+
+          <div class="tile">
+            <div class="tile__media">
+              <img class="tile__img" src="" alt=""  />
+            </div>
+            <div class="tile__details">
+              <div class="tile__title">
+              </div>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <!--</div>-->
+
+
+
 
     <div class="space-ten"></div>
 
@@ -115,14 +141,6 @@
   </div>
   </div>
 
-
-  <div class="add_to_list">
-    <select class="form-control" [(ngModel)]="selectedWatchlist" name="selectedWatchlist">
-      <option value="" selected="watchlist">Watchlist</option>
-      <option *ngFor="let watchlist of watchlists" [ngValue]="watchlist">{{watchlist.name}}</option>
-    </select>
-    <button type="button" class="btn btn-primary" (click)="addTolist()"><span class="fa fa-heart"></span> Add To Wishlist</button>
-  </div>
 
 
 

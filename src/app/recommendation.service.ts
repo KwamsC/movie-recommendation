@@ -25,30 +25,33 @@ export class RecommendationService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
+
+  getRecommendedMovies(id: string): Observable<Movie[]>{
+    const url = `${this.recommendationsUrl}${id}/similar`;
+    return this.http.get<Movie[]>(url, httpOptions).pipe(
+      tap(_ => this.log(`found movies matching "${id}"`)),
+      catchError(this.handleError<Movie[]>('searchMovies', []))
+    );
+  }
+
+  private log(message: string) {
+    this.messageService.add('MovieService' + message);
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
 }
 
-getRecommendedMovies (id: string): Observable<Movie[]> {
-  // MUST FIX THE URL AS THE FILTER IS HARDCODED
-  const url = `${this.moviesUrl}?filter[limit]=${10}&filter[skip]=${(pageNr - 1) * 10}`;
-return this.http.get<Movie[]>(url, httpOptions)
-  .pipe(
-    tap(movies => this.log(`fetched Movies`)),
-    catchError(this.handleError('getMovies', []))
-  );
-}
 
-
-
-private handleError<T> (operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
-
-    // TODO: send the error to remote logging infrastructure
-    console.error(error); // log to console instead
-
-    // TODO: better job of transforming error for user consumption
-    this.log(`${operation} failed: ${error.message}`);
-
-    // Let the app keep running by returning an empty result.
-    return of(result as T);
-  };
-}

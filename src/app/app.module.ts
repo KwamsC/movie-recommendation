@@ -1,3 +1,4 @@
+import { PagerService } from './pager.service';
 import { Authguard } from './_guards/authguard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -32,6 +33,8 @@ import { AutorizationInterceptorService } from "./autorization-interceptor.servi
 import { UnauthorizedInterceptorService } from "./unautorized-interceptor.service";
 import { AlertService } from './alert.service';
 import { RecommendationService} from "./recommendation.service";
+import { RecommendationComponent } from './recommendation/recommendation.component';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { RecommendationService} from "./recommendation.service";
     AlertComponent,
     MovieDetailComponent,
     WatchlistsComponent,
+    RecommendationComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,7 @@ import { RecommendationService} from "./recommendation.service";
     AuthenticationService,
     AlertService,
     Authguard,
+    PagerService,
     { provide: HTTP_INTERCEPTORS,
       useClass: AutorizationInterceptorService,
       multi: true

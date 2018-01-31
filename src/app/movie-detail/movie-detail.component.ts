@@ -9,6 +9,7 @@ import {Watchlist} from "../DOM/watchlist";
 import { Rating} from "../DOM/rating";
 import {RatingsService} from "../ratings.service";
 import {User} from "../DOM/User";
+import {RecommendationService} from "../recommendation.service";
 
 @Component({
   selector: 'app-movie-detail',
@@ -20,7 +21,7 @@ export class MovieDetailComponent implements OnInit {
   selectedWatchlist: Watchlist;
   watchlists: Watchlist[];
   average: number;
-  length:number;
+  recommendedMovies: Movie[];
 
   @Input() movie: Movie;
 
@@ -33,12 +34,14 @@ export class MovieDetailComponent implements OnInit {
   ratingComment: string;
 
   constructor(  private route: ActivatedRoute,
+                private recommendationService: RecommendationService,
                 private movieService: MovieService,
                 private ratingsService: RatingsService,
                 private location: Location) { }
 
 
   ngOnInit(): void {
+    this.getRecommendations();
     this.getMovie();
     this.getWatchlists();
     this.getRatingsForMovie();
@@ -60,6 +63,13 @@ export class MovieDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  getRecommendations(): void {
+    this.route.params.subscribe( params =>
+      this.recommendationService.getRecommendedMovies(params['id'])
+        .subscribe(recomendedmovies => this.recommendedMovies = recomendedmovies));
+  }
+
 
   getAverage() {
     let total = 0;
