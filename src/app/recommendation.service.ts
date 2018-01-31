@@ -33,7 +33,7 @@ export class RecommendationService {
     return this.http.get<SimilarOutput>(url, httpOptions).pipe(
       map(r => r.movies),
       tap(_ => this.log(`found movies matching "${id}"`)),
-      catchError(this.handleError<Movie[]>('searchMovies', []))
+      catchError(this.handleError<Movie[]>('recommendedmovies', []))
     );
   }
 

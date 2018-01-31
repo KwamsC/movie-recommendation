@@ -36,7 +36,7 @@ export class MovieService {
   */
   getMovies (pageNr: number = 1): Observable<Movie[]> {
     // MUST FIX THE URL AS THE FILTER IS HARDCODED
-    const url = `${this.moviesUrl}?filter[limit]=${10}&filter[skip]=${(pageNr - 1) * 10}`;
+    const url = `${this.moviesUrl}?filter[limit]=${12}&filter[skip]=${(pageNr - 1) * 10}`;
     return this.http.get<Movie[]>(url, httpOptions)
       .pipe(
         tap(movies => this.log(`fetched Movies`)),
@@ -102,23 +102,7 @@ export class MovieService {
    * @param movieID - represents the movie from which you want to find similarities.
    * @param pageNr - represents the pageNumber out of the total in the movieSet.
    */
-  getMovieRecommendations(movieID: string): Observable<Movie[]> {
-    const url = `${this.moviesUrl}/${movieID}/similar`;
 
-    return this.http.get<Movie[]>(url, httpOptions).pipe(
-      tap((movieSet: Movie[]) => console.log('Fetchedd'))
-    );
-  }
-
-  // /** GET hero by id. Return `undefined` when id not found */
-  // getMovieNo404<Data>(id: number): Observable<Movie> {
-  //   const url = `${this.moviesUrl}/?id=${id}`;
-  //   return this.http.get<Movie[]>(url)
-  //     .pipe(
-  //       tap(watchlists => this.log(`fetched Watchlists`)),
-  //       catchError(this.handleError('lists', []))
-  //     );
-  // }
 
   getMoviesFromlist(id: string): Observable<Watchlist> {
     const url = `${this.movielisturl}/${id}/movies`;
@@ -127,33 +111,6 @@ export class MovieService {
       catchError(this.handleError<Watchlist>(`getMovie id=${id}`))
     );
   }
-  // getMovie(): Observable<Movie>{
-  // return this.http.get<Movie>(this.moviesUrl).pipe(
-  //       tap(movie => this.log(`fetched movie id=`+movie.id)),
-  //       catchError(this.handleError<Movie>(`getMovie id=`)))
-  // }
-  // /** GET hero by id. Return `undefined` when id not found */
-  // getMovieNo404<Data>(id: number): Observable<Movie> {
-  //   const url = `${this.moviesUrl}/?id=${id}`;
-  //   return this.http.get<Movie[]>(url)
-  //     .pipe(
-  //       map(movies => movies[0]), // returns a {0|1} element array
-  //       tap(h => {
-  //         const outcome = h ? `fetched` : `did not find`;
-  //         this.log(`${outcome} movie id=${id}`);
-  //       }),
-  //       catchError(this.handleError<Movie>(`getMovie id=${id}`))
-  //     );
-  // }
-  //
-  // /** GET hero by id. Will 404 if id not found */
-  // getMovie(id: string): Observable<Movie> {
-  //   const url = `${this.singleMovieUrl}${id}`;
-  //   return this.http.get<Movie>(url, httpOptions).pipe(
-  //     tap(_ => this.log(`fetched movie id=${id}`)),
-  //     catchError(this.handleError<Movie>(`getMovie id=${id}`))
-  //   );
-  // }
 
   getMovie(id: string): Observable<Movie> {
     const url = `${this.singleMovieUrl}${id}`;
@@ -162,8 +119,6 @@ export class MovieService {
       catchError(this.handleError<Movie>(`getHero id=${id}`))
     );
   }
-
-
 
 
   /* GET heroes whose name contains search term */
