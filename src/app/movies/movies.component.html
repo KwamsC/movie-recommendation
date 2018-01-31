@@ -36,7 +36,7 @@
                     <li class = "page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
                         <a (click)="setPage(pager.currentPage + 1)">Next</a>
                     </li>
-                    <li class = "page-item" [ngClass]="pager.currentPage === pager.totalPages ? 'disabled' ">
+                    <li class = "page-item" [ngClass]="{disabled: pager.currentPage === pager.totalPages} ">
                         <a (click)="setPage(pager.totalPages)">Last</a>
                     </li>
                 </ul>
