@@ -105,6 +105,12 @@ export class RatingsService {
     );
   }
 
+  deleteRating(ratingId: String): Observable<Rating> {
+    const url = this.ratingsUrl + `/${ratingId}`;
+    return this.http.delete<Rating>(url, httpOptions).pipe(
+    );
+  }
+
 
   /**
    * Handle Http operation that failed.
