@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'movies/:id', component: MovieDetailComponent, canActivate: [Authguard]},
   { path: 'search', component: MovieSearchComponent, canActivate: [Authguard]},
   { path: 'watchlists', component: WatchlistsComponent, canActivate: [Authguard]},
-  { path: 'recommendation', component: RecommendationComponent},
+
 ];
 
 @NgModule({
