@@ -2,14 +2,13 @@
   <div class="row">
     <div class="row__inner">
       <div  class="tile" *ngFor="let movie of recommendedMovies">
-        <div class="tile__media">
+        <a routerLink="/movies/{{movie.id}}"><div class="tile__media">
           <img class="tile__img" src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" alt=""  />
         </div>
         <div class="tile__details">
-          <div class="tile__title">
-            {{movie.title}}
-          </div>
         </div>
+      </a>
+
       </div>
     </div>
   </div>

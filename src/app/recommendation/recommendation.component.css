@@ -57,8 +57,8 @@ a:hover {
 .tile {
   position: relative;
   display: inline-block;
-  width: 250px;
-  height: 140.625px;
+  width: 140.625px;
+  height: 250px;
   margin-right: 10px;
   font-size: 20px;
   cursor: pointer;
@@ -67,8 +67,8 @@ a:hover {
 }
 
 .tile__img {
-  width: 250px;
-  height: 140.625px;
+  width: 140.625px;
+  height: 250px;
   object-fit: cover;
 }
 
@@ -102,6 +102,7 @@ a:hover {
   position: absolute;
   bottom: 0;
   padding: 10px;
+  color:whitesmoke;
 }
 
 .row__inner:hover {
@@ -111,11 +112,11 @@ a:hover {
   opacity: 0.3;
 }
 .row__inner:hover .tile:hover {
-  transform: scale(2);
+  transform: scale(1.8);
   opacity: 1;
 }
 
 .tile:hover ~ .tile {
-  transform: translate3d(250px, 0, 0);
+  transform: translate3d(115px, 0, 0);
 }
 

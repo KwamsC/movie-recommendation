@@ -11,7 +11,32 @@
 
 
 <div class="container movies">
-<div class="row">
+    <div class="row">
+        <div class="col 12">
+            <!-- pager -->
+            <nav>
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination text-center">          
+                      <li class = "page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                          <a class = "page-link" (click)="setPage(1); ">First</a>
+                      </li>
+                      <li class = "page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                          <a class = "page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
+                      </li>
+                      <li class = "page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                          <a class = "page-link" (click)="setPage(page)">{{page}}</a>
+                      </li>
+                      <li class = "page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                          <a class = "page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
+                      </li>
+                      <li class = "page-item" [ngClass]="{disabled: pager.currentPage === pager.totalPages} ">
+                          <a class = "page-link" (click)="setPage(pager.totalPages)">Last</a>
+                      </li>
+                  </ul>
+                </nav>
+        </div> 
+    </div>
+
+  <div class="row">
   <div *ngFor="let movie of movies" class="col-md-3">
         <div class="card card-01 height-fix">
           <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" alt="Card image cap">
@@ -22,30 +47,7 @@
         </div>
       </div>
     </div>
-  <div class="row">
-      <div class="text-center">
-          <!-- pager -->
-          <nav>
-              <ul *ngIf="pager.pages && pager.pages.length" class="pagination">          
-                    <li class = "page-item" [ngClass]="{disabled:pager.currentPage === 1}">
-                        <a class = "page-link" (click)="setPage(1); ">First</a>
-                    </li>
-                    <li class = "page-item" [ngClass]="{disabled:pager.currentPage === 1}">
-                        <a class = "page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
-                    </li>
-                    <li class = "page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                        <a class = "page-link" (click)="setPage(page)">{{page}}</a>
-                    </li>
-                    <li class = "page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                        <a class = "page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
-                    </li>
-                    <li class = "page-item" [ngClass]="{disabled: pager.currentPage === pager.totalPages} ">
-                        <a class = "page-link" (click)="setPage(pager.totalPages)">Last</a>
-                    </li>
-                </ul>
-              </nav>
-      </div> 
-  </div>
+
 
 </div>
 
