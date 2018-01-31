@@ -17,7 +17,7 @@ export class MoviesComponent implements OnInit {
   watchlist: Watchlist;
   movie: Movie;
   watchlists: Watchlist[];
-  pagerService: PagerService;
+
 
   // pager object
   pager: any = {};
@@ -28,7 +28,8 @@ export class MoviesComponent implements OnInit {
    movieCount: Count;
 
   constructor(private movieService: MovieService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private pagerService: PagerService) { }
 
   ngOnInit() {
     this.getMovieCount();
