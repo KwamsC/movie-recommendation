@@ -10,6 +10,7 @@ import { Rating} from "../DOM/rating";
 import {RatingsService} from "../ratings.service";
 import {User} from "../DOM/User";
 import {RecommendationService} from "../recommendation.service";
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -33,12 +34,14 @@ export class MovieDetailComponent implements OnInit {
   ratingValue: string;
   ratingComment: string;
 
+  showDelete: Boolean;
+
   constructor(  private route: ActivatedRoute,
                 private recommendationService: RecommendationService,
                 private movieService: MovieService,
                 private ratingsService: RatingsService,
+                private authorizationService: AuthenticationService,
                 private location: Location) { }
-
 
   ngOnInit(): void {
     this.getRecommendations();
@@ -47,6 +50,7 @@ export class MovieDetailComponent implements OnInit {
     this.getRatingsForMovie();
     this.inputRating = new Rating();
     this.selectedWatchlist = new Watchlist();
+    this.showDelete = this.authorizationService.isAdmin();
   }
 
   getWatchlists(): void {
@@ -109,6 +113,12 @@ export class MovieDetailComponent implements OnInit {
     this.ratingsService.rateMovie(this.inputRating).subscribe(
       respons => {console.log('rating Succssful' + respons);
         this.getRatingsForMovie(); }
+    );
+  }
+
+  deleteRating(ratingId: string) {
+    this.ratingsService.deleteRating(ratingId).subscribe(
+      x => this.getRatingsForMovie()
     );
   }
 }

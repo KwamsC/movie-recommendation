@@ -42,7 +42,7 @@ a:hover {
 }
 
 .row {
-  overflow: scroll;
+  overflow-x: scroll;
   width: 100%;
 }
 
