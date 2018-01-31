@@ -2,8 +2,6 @@
 
 <app-navbar></app-navbar>
 
-<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" /> -->
-
 <div class="container"> <h2>My Movies</h2>
 
 <button class="btn btn-primary" (click)="sortAsc()">By Title Ascending</button>
@@ -38,7 +36,7 @@
                     <li class = "page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
                         <a (click)="setPage(pager.currentPage + 1)">Next</a>
                     </li>
-                    <li class = "page-item" [ngClass]="pager.currentPage === pager.totalPages ? 'disabled' : 'active'">
+                    <li class = "page-item" [ngClass]="pager.currentPage === pager.totalPages ? 'disabled' ">
                         <a (click)="setPage(pager.totalPages)">Last</a>
                     </li>
                 </ul>
