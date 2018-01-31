@@ -6,7 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Watchlist } from './DOM/watchlist';
 import { Movie } from './DOM/movie';
-import { User } from './DOM/user';
+import { User } from './DOM/User';
 
 
 const httpOptions = {
