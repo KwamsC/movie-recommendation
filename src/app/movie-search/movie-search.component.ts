@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject }    from 'rxjs/Subject';
-import { of }         from 'rxjs/observable/of';
 
 import {
   debounceTime, distinctUntilChanged, switchMap
@@ -19,13 +18,17 @@ import {MovieService} from "../movie.service";
 export class MovieSearchComponent implements OnInit {
   movies$: Observable<Movie[]>;
   private searchTerms = new Subject<string>();
-
   constructor(private movieService: MovieService) {}
 
   // Push a search term into the observable stream.
   search(term: string): void {
     this.searchTerms.next(term);
   }
+
+  // $scope.search = function (term) {
+  //   return !!((term.itemcity.toUpperCase().indexOf($scope.query.toUpperCase() || '') !== - 1 || row.quantity.indexOf($scope.query || '') !== - 1));
+  // };
+
 
   ngOnInit(): void {
     this.movies$ = this.searchTerms.pipe(

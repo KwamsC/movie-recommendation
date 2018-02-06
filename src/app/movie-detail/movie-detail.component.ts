@@ -11,6 +11,7 @@ import {RatingsService} from "../ratings.service";
 import {User} from "../DOM/User";
 import {RecommendationService} from "../recommendation.service";
 import { AuthenticationService } from '../authentication.service';
+import {WatchlistService} from "../watchlist.service";
 
 @Component({
   selector: 'app-movie-detail',
@@ -37,6 +38,7 @@ export class MovieDetailComponent implements OnInit {
   showDelete: Boolean;
 
   constructor(  private route: ActivatedRoute,
+                private watchlistService: WatchlistService,
                 private recommendationService: RecommendationService,
                 private movieService: MovieService,
                 private ratingsService: RatingsService,
@@ -54,7 +56,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   getWatchlists(): void {
-    this.movieService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
+    this.watchlistService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
   }
 
   getMovie(): void {

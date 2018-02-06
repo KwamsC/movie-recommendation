@@ -6,6 +6,7 @@ import { Movie } from '../DOM/movie';
 import { MovieService} from '../movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { Watchlist} from '../DOM/watchlist';
+import { WatchlistService} from "../watchlist.service";
 
 
 @Component({
@@ -29,6 +30,7 @@ export class MoviesComponent implements OnInit {
 
   constructor(private movieService: MovieService,
               private route: ActivatedRoute,
+              private watchlistService: WatchlistService,
               private pagerService: PagerService) { }
 
   ngOnInit() {
@@ -48,7 +50,7 @@ export class MoviesComponent implements OnInit {
 
 
   getWatchlists(): void {
-    this.movieService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
+    this.watchlistService.getWatchlists().subscribe(watchlists => this.watchlists = watchlists);
   }
 
 

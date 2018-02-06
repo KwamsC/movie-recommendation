@@ -1,9 +1,11 @@
+<!--<script src="fuzzyset.js"></script>-->
+
 <div style="position: absolute;">
 <div id="search-component">
   <input #searchBox type="text" id="search-box" placeholder="Search.." (keyup)="search(searchBox.value)" />
 
   <ul class="search-result">
-    <li *ngFor="let movie of movies$ | async" >
+    <li *ngFor="let movie of movies$ |  async">
       <a routerLink="/movies/{{movie.id}}">
         {{movie.title}}
       </a>

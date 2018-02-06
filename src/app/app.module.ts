@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder} from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
 // Components
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -22,6 +23,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { MoviesComponent } from './movies/movies.component';
 import { WatchlistsComponent } from './watchlists/watchlists.component';
 import { AlertComponent } from './alert/alert.component';
+import { RecommendationComponent } from './recommendation/recommendation.component';
 
 // Services
 import { WatchlistService } from './watchlist.service';
@@ -33,7 +35,6 @@ import { AutorizationInterceptorService } from './autorization-interceptor.servi
 import { UnauthorizedInterceptorService } from './unautorized-interceptor.service';
 import { AlertService } from './alert.service';
 import { RecommendationService} from './recommendation.service';
-import { RecommendationComponent } from './recommendation/recommendation.component';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
     AlertComponent,
     MovieDetailComponent,
     WatchlistsComponent,
-    RecommendationComponent
+    RecommendationComponent,
   ],
   imports: [
     BrowserModule,

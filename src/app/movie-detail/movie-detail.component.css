@@ -41,6 +41,17 @@ div.movie_img{
   -webkit-box-sizing: border-box;
 }
 
+body {
+  background-color: #F8FAFB;
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 10%;
+}
+body { padding-top: 40px; }
+@media screen and (max-width: 768px) {
+  body { padding-top: 0px; }
+}
+
+
 img{
   width: 70%;
 }

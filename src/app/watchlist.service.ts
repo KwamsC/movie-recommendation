@@ -23,9 +23,7 @@ export class WatchlistService {
   private watchlistsUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/watchlists';
   private usersUrl = 'https://api.us.apiconnect.ibmcloud.com/kchanjongchustudentvunl-dev/sb/api/users';
 
-  constructor(private http: HttpClient, private messageService: MessageService) {
-
-  }
+  constructor(private http: HttpClient, private messageService: MessageService) {}
 
   createWatchlist(watchlist: Watchlist): Observable<Watchlist> {
     return this.http.post<Watchlist>(this.myWatchlistsUrl, watchlist, httpOptions).pipe(
@@ -33,6 +31,7 @@ export class WatchlistService {
     );
   }
 
+  //done
   getWatchlists(): Observable<Watchlist[]> {
     return this.http.get<Watchlist[]>(this.myWatchlistsUrl, httpOptions).pipe(
       catchError(this.handleError('getWatchlists', []))

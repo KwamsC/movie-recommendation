@@ -34,9 +34,18 @@ export class MovieService {
    *  @param pageNr - Represtents the page number as requested by the user and will
    *    return a predefined number of results. Page numbers start at 1.
   */
+
+  getMovie(id: string): Observable<Movie> {
+    const url = `${this.singleMovieUrl}${id}`;
+    return this.http.get<Movie>(url, httpOptions).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Movie>(`getHero id=${id}`))
+    );
+  }
+
   getMovies (pageNr: number = 1): Observable<Movie[]> {
     // MUST FIX THE URL AS THE FILTER IS HARDCODED
-    const url = `${this.moviesUrl}?filter[limit]=${12}&filter[skip]=${(pageNr - 1) * 10}`;
+    const url = `${this.moviesUrl}?filter[limit]=${12}&filter[skip]=${(pageNr - 1) * 12}`;
     return this.http.get<Movie[]>(url, httpOptions)
       .pipe(
         tap(movies => this.log(`fetched Movies`)),
@@ -51,14 +60,6 @@ export class MovieService {
       tap( myMovieCount => {this.log(`there are movies in the database.`);
       catchError(this.handleError('getMovies', [])); }
     )) ;
-
-  }
-
-  rateMovie(rating: Rating): Observable<Rating> {
-    return this.http.post<Rating>(this.ratingsUrl, rating, httpOptions).pipe(
-      tap((rating: Rating) => console.log('rated movie' + rating.score)),
-      catchError(this.handleError<Rating>('ratemovie'))
-    );
   }
 
   /** GET hero by id. Return `undefined` when id not found */
@@ -78,23 +79,12 @@ export class MovieService {
 
   /** Watchlists*/
 
-  createWatchlist(watchlist: Watchlist): Observable<Watchlist> {
-    return this.http.post<Watchlist>(this.listUrl, watchlist, httpOptions).pipe(
-      tap((watchlist : Watchlist)=>console.log('Created customer with id ='+ watchlist.name)),
-      catchError(this.handleError<Watchlist>('create list'))
-    );
-  }
-
   AddmovieToWatchlist (movie: Movie, id: string): Observable<Movie> {
     const url = `${this.movielisturl}/${id}/movies/rel/${movie.id}`;
     return this.http.put<Movie>(url, null, httpOptions).pipe(
       tap((movie: Movie) => this.log(`added movie w/ id=${movie.title}`)),
       catchError(this.handleError<Movie>('addMovie'))
     );
-  }
-
-  deleteWatchlist() {
-
   }
 
   /**
@@ -112,17 +102,22 @@ export class MovieService {
     );
   }
 
-  getMovie(id: string): Observable<Movie> {
-    const url = `${this.singleMovieUrl}${id}`;
-    return this.http.get<Movie>(url, httpOptions).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Movie>(`getHero id=${id}`))
-    );
-  }
 
+  /* GET heroes whose name contains search term */
+  // searchHeroes(term: string): Observable<Hero[]> {
+  //   if (!term.trim()) {
+  //     // if not search term, return empty hero array.
+  //     return of([]);
+  //   }
+  //   return this.http.get<Hero[]>(`api/heroes/?name=${term}`).pipe(
+  //     tap(_ => this.log(`found heroes matching "${term}"`)),
+  //     catchError(this.handleError<Hero[]>('searchHeroes', []))
+  //   );
+  // }
 
   /* GET heroes whose name contains search term */
   searchMovies(term: string): Observable<Movie[]> {
+
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
@@ -159,22 +154,6 @@ export class MovieService {
   private log(message: string) {
     this.messageService.add('MovieService' + message);
   }
-
-  getWatchlists (): Observable<Watchlist[]> {
-    return this.http.get<Watchlist[]>(this.listUrl, httpOptions)
-      .pipe(
-        tap(watchlists => this.log(`fetched Watchlists`)),
-        catchError(this.handleError('lists', []))
-      );
-  }
-
-
-
-
-
-
-
-
 
   //////// Save methods //////////
 

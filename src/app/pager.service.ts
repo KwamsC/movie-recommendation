@@ -15,14 +15,13 @@ export class PagerService {
     return result;
   }
 
-
   /**
    * Generate a Pager to  be used for pagination.
    * @param totalItems - Total count of items
    * @param currentPage - Current active page
    * @param pageSize  - number of items to be displayed in a page
    */
-  public getPager(totalItems: number, currentPage: number = 1, pageSize: number = 10) {
+  public getPager(totalItems: number, currentPage: number = 1, pageSize: number = 12) {
     // calculate total pages
     const totalPages = Math.ceil(totalItems / pageSize);
 

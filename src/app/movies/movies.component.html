@@ -1,7 +1,4 @@
-
-
-<app-navbar></app-navbar>
-
+<body>
 <div class="container"> <h2>My Movies</h2>
 
 <button class="btn btn-primary" (click)="sortAsc()">By Title Ascending</button>
@@ -15,7 +12,7 @@
         <div class="col 12">
             <!-- pager -->
             <nav>
-                <ul *ngIf="pager.pages && pager.pages.length" class="pagination text-center">          
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination text-center">
                       <li class = "page-item" [ngClass]="{disabled:pager.currentPage === 1}">
                           <a class = "page-link" (click)="setPage(1); ">First</a>
                       </li>
@@ -33,7 +30,7 @@
                       </li>
                   </ul>
                 </nav>
-        </div> 
+        </div>
     </div>
 
   <div class="row">
@@ -51,4 +48,4 @@
 
 </div>
 
-
+</body>

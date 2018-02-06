@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Movie } from '../DOM/movie';
 import { WatchlistService } from '../watchlist.service';
 import { ActivatedRoute } from '@angular/router';
