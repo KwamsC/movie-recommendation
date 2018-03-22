@@ -8,6 +8,7 @@ import { Router } from '@angular/router/';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   user: User;
@@ -25,4 +26,9 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.user).subscribe();
 
   }
+
+
+
+
+
 }
