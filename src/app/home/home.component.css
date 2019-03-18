@@ -100,8 +100,8 @@
 /*}*/
 
 .purple-filter:after {
-  background: rgba(186, 182, 100, 0.64);
-  background: linear-gradient(to top right, rgba(101, 98, 30, 0.88), rgba(0, 0, 0, 0.52));
-  background: -moz-linear-gradient(to bottom right, rgba(170, 160, 69, 0.88), rgba(0, 0, 0, 0.45));
+  background: rgba(186, 182, 100, 0);
+  background: -webkit-gradient(linear, left bottom, right top, from(rgba(101, 98, 30, 0)), to(rgba(0, 0, 0, 0.45)));
+  background: linear-gradient(to top right, rgba(251, 243, 74, 0), rgba(0, 0, 0, 0.28));
   background: -webkit-linear-gradient(to bottom right, rgba(142, 138, 60, 0.88), rgba(0, 0, 0, 0.45));
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 import { FormsModule } from '@angular/forms';
 
 import { Movie} from "../DOM/movie";
@@ -20,7 +21,8 @@ import {WatchlistService} from "../watchlist.service";
 })
 
 export class MovieDetailComponent implements OnInit {
-  selectedWatchlist: Watchlist;
+  selectedWatchlist: string;
+  watchlist: Watchlist;
   watchlists: Watchlist[];
   average: number;
   recommendedMovies: Movie[];
@@ -51,8 +53,8 @@ export class MovieDetailComponent implements OnInit {
     this.getWatchlists();
     this.getRatingsForMovie();
     this.inputRating = new Rating();
-    this.selectedWatchlist = new Watchlist();
     this.showDelete = this.authorizationService.isAdmin();
+    // this.select();
   }
 
   getWatchlists(): void {
@@ -97,9 +99,19 @@ export class MovieDetailComponent implements OnInit {
         .subscribe(ratings => this.ratings = ratings));
   }
 
+  // selectWatchlist(watchlist: Watchlist) {
+  //   this.selectedWatchlist = watchlist;
+  //   this.addTolist()
+  // }
+
+
+  // select(): void {
+  //   this.getWatchlists()
+  //   this.selectedWatchlist = "Watchlist";
+  // }
 
   addTolist(): void {
-    this.movieService.AddmovieToWatchlist(this.movie, this.selectedWatchlist.id).subscribe();
+    this.movieService.AddmovieToWatchlist(this.movie, this.selectedWatchlist).subscribe();
   }
 
   rateMovie(): void {

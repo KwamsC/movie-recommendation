@@ -1,132 +1,213 @@
-
 <body>
-<div *ngIf="movie">
-  <div class="container">
+  <div *ngIf="movie">
 
-    <div class="movie_info" id="movie_info">
-
-
-      <div class="movie-details">
-
-        <div class="movie_img">
-          <img src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" class="img-responsive">
-        </div>
-
-        <div class="details">
-          <h2> <span>{{movie.title}} ({{movie.release_date.substring(0,4)}})</span></h2>
-          <p class="overview">{{movie.overview}}</p>
-          <p>Genre: {{movie.genres}}</p>
-          <p class="runtime"> <span class="fa fa-clock-o"></span> {{movie.runtime}} minutes</p>
-          <p>Language: {{movie.language}}</p>
-
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <span class="badge-box" ><i class="fa fa-star" value="5"></i></span>
-            <span class="movie__rating">{{getAverage()|number :'1.1-1'}}</span>
-          </div>
-
-          <div class="row">
-            <div class="col-md-8">
-              <div class="add_to_list">
-                <select class="form-control" [(ngModel)]="selectedWatchlist" name="selectedWatchlist">
-                  <option value="" selected="watchlist">Watchlist</option>
-                  <option *ngFor="let watchlist of watchlists" [ngValue]="watchlist">{{watchlist.name}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="btn-ground">
-                <button type="button" class="btn btn-primary" (click)="addTolist()"><span class="fa fa-heart"></span> Add To Wishlist</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="space-ten"></div>
-        </div>
-          <div class="space-ten"></div>
-
-        <div class="space-ten"></div>
-
-        <div class="btn-ground">
-          <button type="button" class="btn btn-primary" (click)="goBack()">back</button>
-        </div>
-
-        </div>
-      </div>
+    <div class="main main-raised">
+      <div class="section section-basic">
+        <div class="container">
+          <div class="container marketing">
 
 
+              <div class="row featurette">
 
-
-
-
-
-    <div class="space-ten"></div>
-
-      <div class="comment">
-        <div class="row">
-          <div class="col-md-8">
-            <textarea class="form-control" [(ngModel)]="ratingComment" name="addComment" id="addComment" placeholder="comment" rows="5"></textarea>
-          </div>
-          <div class="col-md-4">
-            <div class="btn-ground">
-
-              <select class="form-control" [(ngModel)]="ratingValue"  name="ratingValue">
-                <option value="" selected="">Rating</option>
-                <option [ngValue]="1">1</option>
-                <option [ngValue]="2">2</option>
-                <option [ngValue]="3">3</option>
-                <option [ngValue]="4">4</option>
-                <option [ngValue]="5">5</option>
-              </select>
-              <button type="button" class="btn btn-primary" (click)="rateMovie()"><span class="glyphicon glyphicon-shopping-cart"></span> rate movie</button>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-              <div class="page-header">
-                  <h1>Recommendations</h1>
+                <div class="col-md-5 movieimage">
+                  <img class="featurette-image img-fluid mx-auto" src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" class="movie-img" alt="Generic placeholder image">
                 </div>
-              <app-recommendation [movieId]="movie.id"></app-recommendation>
-          </div>
-        </div>
-    </div>
 
-      <!-- This is a comments list Template -->
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="page-header">
-              <h1><small class="pull-right" *ngIf="this.ratings">{{this.ratings?.length}} Ratings</small> Ratings </h1>
-            </div>
-            <div class="comments-list" *ngIf="ratings?.length > 0">
-              <div class="media" *ngFor="let rating of ratings">
-                <div class="media-body">
-                  <p><span><h4 class="media-heading user_name">UserID: {{rating.userId}}</h4></span>
-                    <span ><small class="pull-right">{{rating.timestamp}}</small> Score: {{rating.score}}/5</span>
-                  </p>
-                  <p>  {{rating.comment}} </p>
-                  <div *ngIf="this.showDelete">
-                      <button class="btn btn-warning" (click)="deleteRating(rating.id)">Delete</button>
+                <div class="col-md-7 moviedetail">
+                  <h2 class="featurette-heading">{{movie.title}} ({{movie.release_date.substring(0,4)}})</h2>
+                  <p class="overview">{{movie.overview}}</p>
+                  <p>Genre: {{movie.genres}}</p>
+                  <p class="runtime"> <span class="fa fa-clock-o"></span> {{movie.runtime}} minutes</p>
+                  <p>Language: {{movie.language | uppercase}}</p>
+
+                  <div class="add-to-list">
+                    <label>Watchlist</label>
+                    <select [(ngModel)]="selectedWatchlist">
+                      <option value="" [selected]="">Watchlist</option>
+
+                      <option *ngFor="let watchlist of watchlists"
+                              [value]="watchlist.id">{{watchlist.name}}</option>
+                    </select>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" (click)="addTolist()"><span class="fa fa-heart"></span> Add To Wishlist</button>
                   </div>
+
+
+
+                      <!--<button class="btn btn-block  btn-primary " data-toggle="modal" data-target="#myModal"> <i class="material-icons">bookmark_border</i> Add To List</button>-->
+                        <!--<button type="button" class="btn btn-primary" data-toggle="modal" (click)="addTolist()"><span class="fa fa-heart"></span> Add To Wishlist</button>-->
+
+
+                  <div class="rating">
+                    <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <span class="badge-box" ><i class="fa fa-star" value="5"></i></span>
+                  <span class="movie__rating">{{getAverage()|number :'1.1-1'}}</span>
+                  </div>
+
                 </div>
               </div>
-            </div>
+
           </div>
         </div>
       </div>
-    <!-- Ends comments list Template -->
+    </div>
+  </div>
 
+
+
+
+
+
+<!--<div *ngIf="movie">-->
+  <!--<div class="container">-->
+
+    <!--<div class="movie_info" id="movie_info">-->
+
+
+      <!--<div class="movie-details">-->
+
+        <!--<div class="movie_img">-->
+          <!--<img src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" class="img-responsive">-->
+        <!--</div>-->
+
+        <!--<div class="details">-->
+          <!--<h2> <span>{{movie.title}} ({{movie.release_date.substring(0,4)}})</span></h2>-->
+          <!--<p class="overview">{{movie.overview}}</p>-->
+          <!--<p>Genre: {{movie.genres}}</p>-->
+          <!--<p class="runtime"> <span class="fa fa-clock-o"></span> {{movie.runtime}} minutes</p>-->
+          <!--<p>Language: {{movie.language}}</p>-->
+
+          <!--<div class="rating">-->
+            <!--<i class="fa fa-star"></i>-->
+            <!--<i class="fa fa-star"></i>-->
+            <!--<i class="fa fa-star"></i>-->
+            <!--<i class="fa fa-star"></i>-->
+            <!--<span class="badge-box" ><i class="fa fa-star" value="5"></i></span>-->
+            <!--<span class="movie__rating">{{getAverage()|number :'1.1-1'}}</span>-->
+          <!--</div>-->
+
+          <!--<div class="row">-->
+            <!--<div class="col-md-8">-->
+              <!--<div class="add_to_list">-->
+                <!--<select class="form-control" [(ngModel)]="selectedWatchlist" name="selectedWatchlist">-->
+                  <!--<option value="" selected="watchlist">Watchlist</option>-->
+                  <!--<option *ngFor="let watchlist of watchlists" [ngValue]="watchlist">{{watchlist.name}}</option>-->
+                <!--</select>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4">-->
+              <!--<div class="btn-ground">-->
+                <!--<button type="button" class="btn btn-primary" (click)="addTolist()"><span class="fa fa-heart"></span> Add To Wishlist</button>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+
+          <!--<div class="space-ten"></div>-->
+        <!--</div>-->
+          <!--<div class="space-ten"></div>-->
+
+        <!--<div class="space-ten"></div>-->
+
+        <!--<div class="btn-ground">-->
+          <!--<button type="button" class="btn btn-primary" (click)="goBack()">back</button>-->
+        <!--</div>-->
+
+        <!--</div>-->
+      <!--</div>-->
+
+
+
+
+
+
+
+    <!--<div class="space-ten"></div>-->
+
+      <!--<div class="comment">-->
+        <!--<div class="row">-->
+          <!--<div class="col-md-8">-->
+            <!--<textarea class="form-control" [(ngModel)]="ratingComment" name="addComment" id="addComment" placeholder="comment" rows="5"></textarea>-->
+          <!--</div>-->
+          <!--<div class="col-md-4">-->
+            <!--<div class="btn-ground">-->
+
+              <!--<select class="form-control" [(ngModel)]="ratingValue"  name="ratingValue">-->
+                <!--<option value="" selected="">Rating</option>-->
+                <!--<option [ngValue]="1">1</option>-->
+                <!--<option [ngValue]="2">2</option>-->
+                <!--<option [ngValue]="3">3</option>-->
+                <!--<option [ngValue]="4">4</option>-->
+                <!--<option [ngValue]="5">5</option>-->
+              <!--</select>-->
+              <!--<button type="button" class="btn btn-primary" (click)="rateMovie()"><span class="glyphicon glyphicon-shopping-cart"></span> rate movie</button>-->
+
+            <!--</div>-->
+          <!--</div>-->
+
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="container">-->
+        <!--<div class="row">-->
+          <!--<div class="col-md-12">-->
+              <!--<div class="page-header">-->
+                  <!--<h1>Recommendations</h1>-->
+                <!--</div>-->
+              <!--<app-recommendation [movieId]="movie.id"></app-recommendation>-->
+          <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+      <!--&lt;!&ndash; This is a comments list Template &ndash;&gt;-->
+      <!--<div class="container">-->
+        <!--<div class="row">-->
+          <!--<div class="col-md-12">-->
+            <!--<div class="page-header">-->
+              <!--<h1><small class="pull-right" *ngIf="this.ratings">{{this.ratings?.length}} Ratings</small> Ratings </h1>-->
+            <!--</div>-->
+            <!--<div class="comments-list" *ngIf="ratings?.length > 0">-->
+              <!--<div class="media" *ngFor="let rating of ratings">-->
+                <!--<div class="media-body">-->
+                  <!--<p><span><h4 class="media-heading user_name">UserID: {{rating.userId}}</h4></span>-->
+                    <!--<span ><small class="pull-right">{{rating.timestamp}}</small> Score: {{rating.score}}/5</span>-->
+                  <!--</p>-->
+                  <!--<p>  {{rating.comment}} </p>-->
+                  <!--<div *ngIf="this.showDelete">-->
+                      <!--<button class="btn btn-warning" (click)="deleteRating(rating.id)">Delete</button>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--&lt;!&ndash; Ends comments list Template &ndash;&gt;-->
+
+  <!--</div>-->
+<!--</div>-->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="material-icons">clear</i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link">Nice Button</button>
+        <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
-  </div>
+</div>
 
 </body>
 

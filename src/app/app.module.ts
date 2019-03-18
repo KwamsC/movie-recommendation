@@ -7,10 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder} from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
 // Components
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+//import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -40,7 +39,7 @@ import { RecommendationService} from './recommendation.service';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    //DashboardComponent,
     NavbarComponent,
     HomeComponent,
     RatingsComponent,
